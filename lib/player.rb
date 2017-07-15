@@ -22,14 +22,14 @@ class Player
      "D1"=>["C1","D2"], "D2"=>["D1","D3","C2"], "D3"=>["C3","D2","D4"], "D4"=>["C4"]}
   end
 
-  def ship_1_placement(command)
+  def ship_1_placement
     ask_for_ship_1_coords
-    get_coords
-    if quit_commands(command)
-      exit_message
-      exit
+    input = get_coords
+    if !board.include?(input)
+      invalid_placement
+      ship_1_placement
     else
-      start_commands()
+      ship_1 << input
     end
   end
 
@@ -45,24 +45,7 @@ class Player
   end
 
   def get_coords
-    input = gets.chomp
-    messages.change_commands(input)
-    messages.set_commands
-  end
-
-  def change_commands(command)
-    commands = command.split
-    second_entry(commands)
-    long_third_command(commands,commands[1])
-    @first_command = commands[0] if commands[0] != nil
-    @second_command = commands[1] if commands[1] != nil
-    @third_command = commands[2] if commands[2] != nil
-  end
-
-  def set_commands
-    @first_command  = commands.first_command
-    @second_command = commands.second_command if commands.second_command != nil
-    @third_command  = commands.third_command if commands.third_command != nil
+    input = gets.chomp.upcase
   end
 
 end
