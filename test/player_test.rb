@@ -23,4 +23,5 @@ class PlayerTest < Minitest::Test
     assert_instance_of Array, player.ship_2
     assert_equal 0, player.ship_2.length
   end
+
 end

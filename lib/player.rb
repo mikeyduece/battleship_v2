@@ -7,10 +7,10 @@ class Player
   attr_accessor :ship_1, :ship_2
 
   def initialize
-    @board = [["A1","A2","A3","A4"],
-              ["B1","B2","B3","B4"],
-              ["C1","C2","C3","C4"],
-              ["D1","D2","D3","D4"]]
+    @board = ["A1","A2","A3","A4",
+              "B1","B2","B3","B4",
+              "C1","C2","C3","C4",
+              "D1","D2","D3","D4"]
     @ship_1 = []
     @ship_2 = []
   end
@@ -22,15 +22,24 @@ class Player
      "D1"=>["C1","D2"], "D2"=>["D1","D3","C2"], "D3"=>["C3","D2","D4"], "D4"=>["C4"]}
   end
 
-  def ship_1_placement
-    ask_for_ship_1_coords
-    input = get_coords
+  def ship_1_placement_coord_one
+    puts "Enter first coordinate for your 2 unit ship: ex. A1"
+    input = gets.chomp.upcase
+    print "> "
     if !board.include?(input)
-      invalid_placement
-      ship_1_placement
+      require "pry"; binding.pry
+      ship_1_placement_coord_one
     else
       ship_1 << input
     end
+  end
+
+  def method_name
+
+  end
+
+  def ship_1_placement_coord_two
+    ask_for_ship_1_coords
   end
 
   def third_coord
@@ -42,10 +51,6 @@ class Player
       "C3"=>[["B3","D3"],["C2","C4"]], "C4"=>[["B4","D4"],["C2","C3"]],
       "D1"=>[["B1","C1"],["D2","D3"]], "D2"=>[["D1","D3"],["B2","C2"]],
       "D3"=>[["D2","D4"],["C3","B3"]], "D4"=>[["B4","C4"],["D2","D3"]]}
-  end
-
-  def get_coords
-    input = gets.chomp.upcase
   end
 
 end
