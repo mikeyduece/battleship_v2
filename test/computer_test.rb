@@ -55,6 +55,13 @@ class ComputerTest < Minitest::Test
   end
 
   def test_third_coordinate_select_is_hash
-    assert_instance_of Hash, computer.test_third_coord
+    assert_instance_of Hash, computer.third_coord
+  end
+
+  def test_it_can_make_a_three_unit_ship
+    computer.make_ship_one
+    computer.make_ship_two
+    require "pry"; binding.pry
+    assert_equal 3, computer.ship_2.lengnth
   end
 end
