@@ -37,16 +37,15 @@ class ComputerTest < Minitest::Test
   end
 
   def test_second_coord_selection_contains_coords_on_board
-    assert computer.second_coord.include?("A4")
-    assert computer.second_coord.include?("B2")
-    assert computer.second_coord.include?("C3")
-    assert computer.second_coord.include?("D1")
+    assert computer.second_coord.member?("A4")
+    assert computer.second_coord.member?("B2")
+    assert computer.second_coord.member?("C3")
+    assert computer.second_coord.member?("D1")
   end
 
   def test_can_tell_if_coord_is_off_board
-    refute computer.second_coord.include?("D5")
-    refute computer.second_coord.include?("A6")
-    refute computer.second_coord.include?("A0")
+    refute computer.second_coord.member?("D5")
+    refute computer.second_coord.member?("A6")
   end
 
   def test_it_can_make_a_two_unit_ship
@@ -62,5 +61,18 @@ class ComputerTest < Minitest::Test
     computer.make_ship_one
     computer.make_ship_two
     assert_equal 3, computer.ship_2.length
+  end
+
+  def test_it_can_tell_if_third_coord_on_board
+    assert computer.third_coord.member?("A4")
+    assert computer.third_coord.member?("B2")
+    assert computer.third_coord.member?("C3")
+    assert computer.third_coord.member?("D1")
+  end
+
+  def test_it_can_tell_if_third_coord_off_board
+    refute computer.third_coord.member?("D5")
+    refute computer.third_coord.member?("A6")
+    refute computer.third_coord.member?("A0")
   end
 end
