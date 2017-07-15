@@ -1,5 +1,6 @@
 class Computer
-  attr_reader :board, :ship_1, :ship_2
+  attr_reader :board
+  attr_accessor :ship_1, :ship_2
 
   def initialize
     @board = [["A1","A2","A3","A4"],
@@ -38,10 +39,8 @@ class Computer
   def make_ship_two
     coord_1 = ship_2_coord_1
     coord_2 = ship_2_coord_2_and_3(coord_1)
-    ship_2 << coord_1
-    ship_2 << coord_2
-    ship_2 = ship_2.flatten
-    require "pry"; binding.pry
+    ship_2 << coord_1.split + coord_2
+    @ship_2 = ship_2.flatten
   end
 
   def ship_2_coord_1
