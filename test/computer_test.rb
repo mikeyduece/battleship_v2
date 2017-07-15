@@ -32,8 +32,29 @@ class ComputerTest < Minitest::Test
     assert_equal 0, computer.ship_2.length
   end
 
-  def test_it_can_make_a_two_unit_ship
-    assert_equal 2, computer.ship.length
+  def test_second_coord_select_is_a_hash
+    assert_instance_of Hash, computer.second_coord
   end
-  
+
+  def test_second_coord_selection_contains_coords_on_board
+    assert computer.second_coord.include?("A4")
+    assert computer.second_coord.include?("B2")
+    assert computer.second_coord.include?("C3")
+    assert computer.second_coord.include?("D1")
+  end
+
+  def test_can_tell_if_coord_is_off_board
+    refute computer.second_coord.include?("D5")
+    refute computer.second_coord.include?("A6")
+    refute computer.second_coord.include?("A0")
+  end
+
+  def test_it_can_make_a_two_unit_ship
+    computer.make_ship_one
+    assert_equal 2, computer.ship_1.length
+  end
+
+  def test_third_coordinate_select_is_hash
+    assert_instance_of Hash, computer.test_third_coord
+  end
 end
