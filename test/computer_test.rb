@@ -61,7 +61,6 @@ class ComputerTest < Minitest::Test
   def test_it_can_make_a_three_unit_ship
     computer.make_ship_one
     computer.make_ship_two
-    require "pry"; binding.pry
-    assert_equal 3, computer.ship_2.lengnth
+    assert_equal 3, computer.ship_2.length
   end
 end

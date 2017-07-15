@@ -36,6 +36,23 @@ class Computer
   end
 
   def make_ship_two
-    
+    coord_1 = ship_2_coord_1
+    coord_2 = ship_2_coord_2_and_3(coord_1)
+    ship_2 << coord_1
+    ship_2 << coord_2
+    ship_2 = ship_2.flatten
+    require "pry"; binding.pry
+  end
+
+  def ship_2_coord_1
+    coord_1 = board.sample.sample
+    ship_2_coord_1 if ship_1.include?(coord_1)
+    coord_1
+  end
+
+  def ship_2_coord_2_and_3(coord_1)
+    coord_2 = third_coord[coord_1].sample
+    ship_2_coord_2_and_3(coord_1) if ship_1.any? {|coord| coord == coord_2}
+    coord_2
   end
 end
