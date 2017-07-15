@@ -27,20 +27,23 @@ class Player
     input = gets.chomp.upcase
     print "> "
     if !board.include?(input)
-      require "pry"; binding.pry
       ship_1_placement_coord_one
     else
       ship_1 << input
     end
   end
 
-  def method_name
-
-  end
-
   def ship_1_placement_coord_two
-    ask_for_ship_1_coords
+    puts "Enter second coordinate for your 2 unit ship: ex. A1"
+    input = gets.chomp.upcase
+    print "> "
+    if !board.include?(input)
+      ship_1_placement_coord_one
+    else
+      ship_1 << input
+    end
   end
+
 
   def third_coord
     { "A1"=>[["A2","A3"],["B1","C1"]], "A2"=>[["A1","A3"],["B2","C2"]],
