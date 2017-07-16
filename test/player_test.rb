@@ -105,4 +105,10 @@ class PlayerTest < Minitest::Test
     refute player.firing_solution(input)
   end
 
+  def test_it_can_tell_if_shot_has_been_chosen_already
+    player.firing_solution("A3")
+    player.firing_solution("A1")
+    refute player.firing_solution("A1")
+  end
+
 end
