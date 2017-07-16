@@ -100,4 +100,9 @@ class PlayerTest < Minitest::Test
     assert_equal 3, player.shots.count
   end
 
+  def test_it_can_validate_shots
+    input = "Z3"
+    refute player.firing_solution(input)
+  end
+
 end
