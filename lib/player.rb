@@ -37,7 +37,7 @@ class Player
     puts "Enter second coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if !board.include?(input)
+    if !board.include?(input) || !second_coord[input]
       ship_1_placement_coord_one
     else
       ship_1 << input
@@ -59,7 +59,7 @@ class Player
     p "Enter second coordinate for 3 unit ship"
     print "> "
     input = gets.chomp.upcase
-    if !board.include?(input) || !second_coord[input] || ship_2.include?(input)
+    if !board.include?(input) || !second_coord[input] || ship_1.include?(input)
       ship_2_placement_coord_two
     else
       ship_2 << input
@@ -70,7 +70,7 @@ class Player
     p "Enter last coordinate for 3 unit ship"
     print "> "
     input = gets.chomp.upcase
-    if !board.include?(input) || !third_coord[input] || ship_2.include?(input)
+    if !board.include?(input) || !third_coord[ship_2] || ship_2.include?(input)
       ship_2_placement_coord_two
     else
       ship_2 << input

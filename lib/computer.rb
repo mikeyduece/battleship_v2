@@ -19,7 +19,7 @@ class Computer
   end
 
   def make_ship_one
-    coord_1 = board.sample.sample
+    coord_1 = board.sample
     ship_1 << coord_1
     coord_2 = second_coord[coord_1].sample
     ship_1 << coord_2
@@ -45,7 +45,7 @@ class Computer
   end
 
   def ship_2_coord_1
-    coord_1 = board.sample.sample
+    coord_1 = board.sample
     ship_2_coord_1 if ship_1.include?(coord_1)
     coord_1
   end
