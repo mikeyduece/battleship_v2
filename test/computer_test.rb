@@ -75,4 +75,17 @@ class ComputerTest < Minitest::Test
     refute computer.third_coord.member?("A6")
     refute computer.third_coord.member?("A0")
   end
+
+  def test_it_can_shoot
+    computer.firing_solution
+    assert_equal 1, computer.shots.count
+  end
+
+  def test_it_can_shoot_more_than_once
+    computer.firing_solution
+    computer.firing_solution
+    assert_equal 2, computer.shots.count
+    computer.firing_solution
+    assert_equal 3, computer.shots.count
+  end
 end

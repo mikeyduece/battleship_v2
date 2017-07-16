@@ -1,6 +1,6 @@
 class Computer
   attr_reader :board
-  attr_accessor :ship_1, :ship_2
+  attr_accessor :ship_1, :ship_2, :shot, :shots
 
   def initialize
     @board = ["A1","A2","A3","A4",
@@ -9,6 +9,8 @@ class Computer
               "D1","D2","D3","D4"]
     @ship_1 = []
     @ship_2 = []
+    @shots  = []
+    @shot   = nil
   end
 
   def second_coord
@@ -57,6 +59,12 @@ class Computer
   end
 
   def firing_solution
-    
+    @shot = board.sample
+    if @shots.include?(@shot)
+      firing_solution
+    else
+      @shots << @shot
+    end
+    @shot
   end
 end
