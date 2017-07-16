@@ -24,4 +24,11 @@ class PlayerTest < Minitest::Test
     assert_equal 0, player.ship_2.length
   end
 
+  def test_third_coord_validation
+    player.ship_2 = ["A1", "A2"]
+    input = "A3"
+    actual = player.third_coord_validation(input)
+    assert_equal ["A1", "A2", "A3"], actual
+  end
+
 end
