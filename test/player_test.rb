@@ -67,7 +67,6 @@ class PlayerTest < Minitest::Test
     refute player.third_coord_validation(input)
   end
 
-
   def test_third_coord_validation
     player.ship_1 = ["D2", "D3"]
     player.ship_2 = ["A1", "A2"]

@@ -58,7 +58,7 @@ class Player
   end
 
   def third_coord_validation(input)
-    if !board.include?(input) || ship_1.include?(input) || !third_coord[ship_2[0]].assoc(input)
+    if !board.include?(input) || ship_1.include?(input) || !third_coord[ship_2[0]].any? {|x|x.include?(input)}
       return false
     else
       ship_2 << input
