@@ -4,7 +4,7 @@ class Player
   include Messages
 
   attr_reader :board
-  attr_accessor :ship_1, :ship_2
+  attr_accessor :ship_1, :ship_2, :shot, :shots, :two_unit_ship
 
   def initialize
     @board = ["A1","A2","A3","A4",
@@ -13,6 +13,10 @@ class Player
               "D1","D2","D3","D4"]
     @ship_1 = []
     @ship_2 = []
+    @shots  = []
+    @shot   = nil
+    @two_unit_ship = 0
+    @three_unit_ship = 0
   end
 
   def second_coord
@@ -71,6 +75,16 @@ class Player
     else
       ship_2 << input
     end
+  end
+
+  def firing_solution(input)
+    @shot = input
+    if !board.include?(shot) || @shots.include?(shot)
+      return false
+    else
+      @shots << shot
+    end
+    @shot
   end
 
 end

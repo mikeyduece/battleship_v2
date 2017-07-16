@@ -83,4 +83,32 @@ class PlayerTest < Minitest::Test
     assert_equal ["A1", "A2", "A3"], player.ship_2
   end
 
+  def test_it_can_shoot
+    input = "A1"
+    player.firing_solution(input)
+    assert_equal 1, player.shots.count
+  end
+
+  def test_it_can_shoot_more_than_once
+    input = "A3"
+    player.firing_solution(input)
+    input = "C4"
+    player.firing_solution(input)
+    assert_equal 2, player.shots.count
+    input = "C1"
+    player.firing_solution(input)
+    assert_equal 3, player.shots.count
+  end
+
+  def test_it_can_validate_shots
+    input = "Z3"
+    refute player.firing_solution(input)
+  end
+
+  def test_it_can_tell_if_shot_has_been_chosen_already
+    player.firing_solution("A3")
+    player.firing_solution("A1")
+    refute player.firing_solution("A1")
+  end
+
 end
