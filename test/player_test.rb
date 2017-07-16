@@ -64,7 +64,6 @@ class PlayerTest < Minitest::Test
   def test_it_can_recognize_invalid_placement_for_ship_2
     player.ship_2 = ["A1", "A2"]
     input         = "B2"
-    require "pry"; binding.pry
     refute player.third_coord_validation(input)
   end
 
