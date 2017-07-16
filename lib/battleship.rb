@@ -6,7 +6,7 @@ require 'terminal-table'
 
 class Battleship
   include Messages
-  attr_accessor :computer_board, :player_board
+  attr_accessor :computer_board, :player_board,
                 :player, :computer
 
   def initialize
@@ -79,7 +79,7 @@ class Battleship
   end
 
   def fire_fight
-    while (player.two_unit_ship != 2 && player.three_unit_ship != 3) || (computer.two_unit_ship != 2 && computer.three_unit_ship != 3)
+    # while (player.two_unit_ship != 2 && player.three_unit_ship != 3) || (computer.two_unit_ship != 2 && computer.three_unit_ship != 3)
 
   end
 
