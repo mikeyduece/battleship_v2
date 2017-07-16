@@ -55,4 +55,8 @@ class Computer
     ship_2_coord_2_and_3(coord_1) if ship_1.member?(coord_2)
     coord_2
   end
+
+  def firing_solution
+    
+  end
 end

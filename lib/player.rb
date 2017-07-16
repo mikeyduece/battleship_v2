@@ -42,7 +42,7 @@ class Player
   end
 
   def ship_1_coord_2_validation(input)
-    if !board.include?(input) || second_coord[ship_1[0]]==input || !second_coord[ship_1[0]].include?(input)
+    if !board.include?(input) || ship_1[0]==input || !second_coord[ship_1[0]].include?(input)
       return false
     else
       ship_1 << input
@@ -57,6 +57,14 @@ class Player
     end
   end
 
+  def ship_2_coord_2_validation(input)
+    if !board.include?(input) || ship_1.include?(input) || !second_coord[ship_2[0]].include?(input)
+      return false
+    else
+      ship_2 << input
+    end
+  end
+
   def third_coord_validation(input)
     if !board.include?(input) || ship_1.include?(input) || !third_coord[ship_2[0]].any? {|x|x.include?(input)}
       return false
@@ -64,7 +72,5 @@ class Player
       ship_2 << input
     end
   end
-
-
 
 end
