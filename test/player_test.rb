@@ -24,11 +24,36 @@ class PlayerTest < Minitest::Test
     assert_equal 0, player.ship_2.length
   end
 
+  def test_first_ship_coordinate_validation
+    input = "A3"
+    player.ship_1_coord_1_validation(input)
+    assert_equal ["A3"], player.ship_1
+  end
+
+  def test_ship_1_coord_is_actually_in_array
+    input = "A3"
+    player.ship_1_coord_1_validation(input)
+    assert_equal 1, player.ship_1.length
+  end
+
+  def test_ship_2_coord_2_validation
+    player.ship_1 = ["A2"]
+    input         = "A3"
+    player.ship_1_coord_2_validation(input)
+    assert_equal ["A2", "A3"], player.ship_1
+    assert_equal 2, player.ship_1.length
+  end
+
+  def test_it_can_recognize_invalid_coords
+    input = 
+  end
+
   def test_third_coord_validation
+    skip
     player.ship_2 = ["A1", "A2"]
     input = "A3"
-    actual = player.third_coord_validation(input)
-    assert_equal ["A1", "A2", "A3"], actual
+    player.third_coord_validation(input)
+    assert_equal ["A1", "A2", "A3"], player.ship_2
   end
 
 end
