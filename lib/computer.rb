@@ -3,10 +3,10 @@ class Computer
   attr_accessor :ship_1, :ship_2
 
   def initialize
-    @board = [["A1","A2","A3","A4"],
-              ["B1","B2","B3","B4"],
-              ["C1","C2","C3","C4"],
-              ["D1","D2","D3","D4"]]
+    @board = ["A1","A2","A3","A4",
+              "B1","B2","B3","B4",
+              "C1","C2","C3","C4",
+              "D1","D2","D3","D4"]
     @ship_1 = []
     @ship_2 = []
   end
@@ -19,7 +19,7 @@ class Computer
   end
 
   def make_ship_one
-    coord_1 = board.sample.sample
+    coord_1 = board.sample
     ship_1 << coord_1
     coord_2 = second_coord[coord_1].sample
     ship_1 << coord_2
@@ -45,7 +45,7 @@ class Computer
   end
 
   def ship_2_coord_1
-    coord_1 = board.sample.sample
+    coord_1 = board.sample
     ship_2_coord_1 if ship_1.include?(coord_1)
     coord_1
   end
@@ -54,5 +54,9 @@ class Computer
     coord_2 = third_coord[coord_1].sample
     ship_2_coord_2_and_3(coord_1) if ship_1.member?(coord_2)
     coord_2
+  end
+
+  def firing_solution
+    
   end
 end
