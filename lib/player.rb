@@ -22,23 +22,23 @@ class Player
      "D1"=>["C1","D2"], "D2"=>["D1","D3","C2"], "D3"=>["C3","D2","D4"], "D4"=>["C4","D3"]}
   end
 
-  def ship_1_placement_coord_one
-    puts "Enter first coordinate for your 2 unit ship: ex. A1"
-    input = gets.chomp.upcase
-    print "> "
-    ship_1_coord_1_validation(input)
-  end
-
-  def ship_1_placement_coord_two
-    puts "Enter second coordinate for your 2 unit ship: ex. A1"
-    input = gets.chomp.upcase
-    print "> "
-    if !board.include?(input) || !second_coord[input]
-      ship_1_placement_coord_two
-    else
-      ship_1 << input
-    end
-  end
+  # def ship_1_placement_coord_one
+  #   puts "Enter first coordinate for your 2 unit ship: ex. A1"
+  #   input = gets.chomp.upcase
+  #   print "> "
+  #   ship_1_coord_1_validation(input)
+  # end
+  #
+  # def ship_1_placement_coord_two
+  #   puts "Enter second coordinate for your 2 unit ship: ex. A1"
+  #   input = gets.chomp.upcase
+  #   print "> "
+  #   if !board.include?(input) || !second_coord[input]
+  #     ship_1_placement_coord_two
+  #   else
+  #     ship_1 << input
+  #   end
+  # end
 
   def ship_1_coord_2_validation(input)
     if !board.include?(input) || !second_coord[ship_1[0]].include?(input)
