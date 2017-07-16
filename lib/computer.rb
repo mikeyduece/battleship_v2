@@ -1,6 +1,7 @@
 class Computer
   attr_reader :board
-  attr_accessor :ship_1, :ship_2, :shot, :shots
+  attr_accessor :ship_1, :ship_2, :shot, :shots,
+                :two_unit_ship, :three_unit_ship
 
   def initialize
     @board = ["A1","A2","A3","A4",
@@ -11,6 +12,8 @@ class Computer
     @ship_2 = []
     @shots  = []
     @shot   = nil
+    @two_unit_ship = 0
+    @three_unit_ship = 0
   end
 
   def second_coord

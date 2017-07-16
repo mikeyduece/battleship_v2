@@ -27,6 +27,13 @@ module Messages
     %w(y Y yes Yes YES).include?(command)
   end
 
+  def miss_message
+    rate = 500
+    voice = "Ralph"
+    miss = "Look Dave, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over."
+    `say -r #{rate} -v #{voice} #{miss}`
+  end
+
   def invalid_placement
     invalid = "Just what do you think you're doing, Dave? Place the ship within the defined
     coordinates on the board"
