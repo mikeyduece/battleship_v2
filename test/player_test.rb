@@ -36,20 +36,41 @@ class PlayerTest < Minitest::Test
     assert_equal 1, player.ship_1.length
   end
 
-  def test_ship_2_coord_2_validation
-    player.ship_1 = ["A2"]
-    input         = "A3"
-    player.ship_1_coord_2_validation(input)
-    assert_equal ["A2", "A3"], player.ship_1
-    assert_equal 2, player.ship_1.length
+  def test_it_can_recognize_invalid_coords
+    input = "A5"
+    refute player.ship_1_coord_1_validation(input)
   end
 
-  def test_it_can_recognize_invalid_coords
-    input = 
+  def test_it_can_recognize_invalid_placement
+    player.ship_1 = ["A3"]
+    input  = "B4"
+    refute player.ship_1_coord_2_validation(input)
   end
+
+  def test_it_can_validate_ship_1_coord_1
+    player.ship_1 = ["A1", "B1"]
+    input = "C2"
+    player.ship_2_coord_1_validation(input)
+    assert_equal 1, player.ship_2.length
+    assert_equal ["C2"], player.ship_2
+  end
+
+  def test_it_can_tell_if_ship_2_coord_1_is_invalid
+    player.ship_1 = ["A1", "B1"]
+    input = "A1"
+    refute player.ship_2_coord_1_validation(input)
+  end
+
+  def test_it_can_recognize_invalid_placement_for_ship_2
+    player.ship_2 = ["A1", "A2"]
+    input         = "B2"
+    require "pry"; binding.pry
+    refute player.third_coord_validation(input)
+  end
+
 
   def test_third_coord_validation
-    skip
+    player.ship_1 = ["D2", "D3"]
     player.ship_2 = ["A1", "A2"]
     input = "A3"
     player.third_coord_validation(input)

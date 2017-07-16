@@ -32,11 +32,36 @@ class Battleship
     puts "Enter second coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if !board.include?(input) || !second_coord[input]
-      ship_1_placement_coord_two
+    player.ship_1_coord_2_validation(input)
+  end
+
+  def ship_2_placement_coord_one
+    p "Enter first coordinate for 3 unit ship: ex A1"
+    print "> "
+    input = gets.chomp.upcase
+    if !board.include?(input)
+      ship_2_placement_coord_one
     else
-      ship_1 << input
+      ship_2 << input
     end
+  end
+
+  def ship_2_placement_coord_two
+    p "Enter second coordinate for 3 unit ship"
+    print "> "
+    input = gets.chomp.upcase
+    if !board.include?(input) || !second_coord[input] || ship_1.include?(input)
+      ship_2_placement_coord_two
+    else
+      ship_2 << input
+    end
+  end
+
+  def ship_2_placement_coord_three
+    p "Enter last coordinate for 3 unit ship"
+    print "> "
+    input = gets.chomp.upcase
+    player.third_coord_validation(input)
   end
 
 end
