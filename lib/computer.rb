@@ -65,7 +65,7 @@ class Computer
     return true if two_unit_ship == 2
   end
 
-  def three_unit_sunk
+  def three_unit_sunk?
     return true if three_unit_ship == 3
   end
 

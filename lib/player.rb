@@ -78,6 +78,14 @@ class Player
     end
   end
 
+  def two_unit_sunk?
+    return true if two_unit_ship == 2
+  end
+
+  def three_unit_sunk?
+    return true if three_unit_ship == 3
+  end
+
   def firing_solution(input)
     if !board.include?(input) || @shots.include?(input)
       return false

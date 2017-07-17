@@ -112,17 +112,19 @@ class Battleship
     end
   end
 
-  
+
 
   def computer_turn
     if player.ship_1.include?(computer.shot)
       render_player_board(computer.shot, "H".red)
       p "Your 2 unit ship was hit!"
       player.two_unit_ship += 1
+      p "I sunk your two unit ship".white if player.two_unit_sunk?
     elsif player.ship_2.include?(computer.shot)
       render_player_board(computer.shot,"H".red)
       p "Your 3 unit ship was hit!"
       player.three_unit_ship += 1
+      p "I sunk your three unit ship".white if player.three_unit_sunk?
     else
       render_player_board(computer.shot,"M".blue)
       p "I have missed completely!"
@@ -134,19 +136,15 @@ class Battleship
       render_computer_board(player.shot,"H".red)
       p "You hit the Alliance's 2 unit ship!"
       computer.two_unit_ship += 1
-    elsif computer.two_unit_ship == 2
-      render_computer_board(player.shot,"H".red)
-      p "You sunk the Alliance's 2 unit ship!"
+      p "You sunk the Alliance's 2 unit ship!" if computer.two_unit_sunk?
     elsif computer.ship_2.include?(player.shot)
       render_computer_board(player.shot,"H".red)
       p "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
-    elsif computer.three_unit_ship == 3
-      render_computer_board(player.shot,"H".red)
-      p "You sunk the Alliance's 3 unit ship!"
+      p "You sunk the Alliance's 3 unit ship!" if computer.three_unit_sunk?
     else
       render_computer_board(player.shot,"M".blue)
-      p "You missed!"
+      p "You missed!".cyan
     end
   end
 
