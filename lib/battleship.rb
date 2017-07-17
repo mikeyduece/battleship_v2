@@ -126,12 +126,14 @@ class Battleship
     if computer.ship_1.include?(player.shot)
       p "You hit the Alliance's 2 unit ship!"
       computer.two_unit_ship += 1
+      render_player_board(player.shot)
     elsif computer.two_unit_ship.count == 2
       p "You sunk the Alliance's 2 unit ship!"
       exit
     elsif computer.ship_2.include?(player.shot)
       p "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
+      render_player_board(player.shot)
     elsif computer.three_unit_ship.count = 3
       p "You sunk the Alliance's 3 unit ship!"
       exit
@@ -140,8 +142,14 @@ class Battleship
     end
   end
 
-  def render_player_board
-
+  def render_player_board(shot)
+    player_board.map! do |coord|
+      if computer.ship_1.include?(shot) || computer.ship_2.include?(shot)
+        coord = "H"
+      else
+        coord = "M"
+      end
+    end
   end
 
 end
