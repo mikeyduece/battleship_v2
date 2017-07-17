@@ -57,7 +57,7 @@ class Computer
 
   def ship_2_coord_2_and_3(coord_1)
     coord_2 = third_coord[coord_1].sample
-    ship_2_coord_2_and_3(coord_1) if ship_1.member?(coord_2)
+    ship_2_coord_2_and_3(coord_1) if ship_1.any? {|x| coord_2.include?(x)}
     coord_2
   end
 

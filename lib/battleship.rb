@@ -1,8 +1,8 @@
+require 'colorize'
+require 'terminal-table'
 require './lib/computer'
 require './lib/player'
 require './lib/messages'
-require 'colorize'
-require 'terminal-table'
 
 class Battleship
   include Messages
@@ -22,12 +22,20 @@ class Battleship
     @computer       = Computer.new
   end
 
+  def start
+    place_computer_ships
+    place_player_ships
+    computer_display
+    player_display
+    fire_fight
+  end
+
   def computer_display
-    Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    computer_display = Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
   end
 
   def player_display
-    Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    player_display = Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
   end
 
   def place_computer_ships
@@ -57,7 +65,7 @@ class Battleship
     input = gets.chomp.upcase
     print "> "
     if !player.ship_1_coord_2_validation(input)
-      ship_1_placement_coord_one
+      ship_1_placement_coord_two
     end
   end
 
@@ -74,7 +82,7 @@ class Battleship
     p "Enter second coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if !player.ship_2_coord_2_validation
+    if !player.ship_2_coord_2_validation(input)
       ship_2_placement_coord_two
     end
   end
@@ -106,50 +114,74 @@ class Battleship
 
   def computer_turn
     if player.ship_1.include?(computer.shot)
+      render_player_board(computer.shot)
       p "Your 2 unit ship was hit!"
       player.two_unit_ship += 1
     elsif player.ship_2.include?(computer.shot)
+      render_player_board(computer.shot)
       p "Your 3 unit ship was hit!"
       player.three_unit_ship += 1
-    elsif player.two_unit_ship.count == 2
+    elsif player.two_unit_ship == 2
+      render_player_board(computer.shot)
       p "Your 2 unit ship has been sunk!"
       exit
-    elsif player.three_unit_ship.count == 3
+    elsif player.three_unit_ship == 3
+      render_player_board(computer.shot)
       p "Your 3 unit ship has been sunk!"
       exit
     else
+      render_player_board(computer.shot)
       p "I have missed completely!"
     end
   end
 
   def player_turn
     if computer.ship_1.include?(player.shot)
+      render_player_board(player.shot)
       p "You hit the Alliance's 2 unit ship!"
       computer.two_unit_ship += 1
-      render_player_board(player.shot)
-    elsif computer.two_unit_ship.count == 2
+    elsif computer.two_unit_ship == 2
+      render_computer_board(player.shot)
       p "You sunk the Alliance's 2 unit ship!"
       exit
     elsif computer.ship_2.include?(player.shot)
+      render_player_board(player.shot)
       p "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
-      render_player_board(player.shot)
-    elsif computer.three_unit_ship.count = 3
+    elsif computer.three_unit_ship = 3
+      render_computer_board(player.shot)
       p "You sunk the Alliance's 3 unit ship!"
       exit
     else
+      render_computer_board(player.shot)
       p "You missed!"
     end
   end
 
   def render_player_board(shot)
-    player_board.map! do |coord|
-      if computer.ship_1.include?(shot) || computer.ship_2.include?(shot)
-        coord = "H"
-      else
-        coord = "M"
+    player_board.each do |row|
+      row.map! do |coord|
+        if computer.ship_1.include?(shot) || computer.ship_2.include?(shot)
+          coord = "H"
+        else
+          coord = "M"
+        end
       end
     end
+    puts player_display
+  end
+
+  def render_computer_board(shot)
+    computer_board.map! do |row|
+      row.map! do |coord|
+        if player.ship_1.include?(shot) || player.ship_2.include?(shot)
+          coord = "H"
+        else
+          coord = "M"
+        end
+      end
+    end
+    puts computer_display
   end
 
 end
