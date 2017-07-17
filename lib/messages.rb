@@ -1,8 +1,4 @@
 module Messages
-  def ask_for_ship_1_coords
-    puts "Enter your 2 unit ship's coordinates now: (ie A1)"
-    print "> "
-  end
 
   def exit_message
     rate = 100

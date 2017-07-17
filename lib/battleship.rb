@@ -25,17 +25,17 @@ class Battleship
   def start
     place_computer_ships
     place_player_ships
-    computer_display
-    player_display
+    puts player_display
+    puts computer_display
     fire_fight
   end
 
   def computer_display
-    computer_display = Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    computer_display = Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
   end
 
   def player_display
-    player_display = Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    player_display = Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
   end
 
   def place_computer_ships
@@ -114,23 +114,23 @@ class Battleship
 
   def computer_turn
     if player.ship_1.include?(computer.shot)
-      render_player_board(computer.shot)
+      render_computer_board(computer.shot)
       p "Your 2 unit ship was hit!"
       player.two_unit_ship += 1
     elsif player.ship_2.include?(computer.shot)
-      render_player_board(computer.shot)
+      render_computer_board(computer.shot)
       p "Your 3 unit ship was hit!"
       player.three_unit_ship += 1
     elsif player.two_unit_ship == 2
-      render_player_board(computer.shot)
+      render_computer_board(computer.shot)
       p "Your 2 unit ship has been sunk!"
       exit
     elsif player.three_unit_ship == 3
-      render_player_board(computer.shot)
+      render_computer_board(computer.shot)
       p "Your 3 unit ship has been sunk!"
       exit
     else
-      render_player_board(computer.shot)
+      render_computer_board(computer.shot)
       p "I have missed completely!"
     end
   end
@@ -141,19 +141,19 @@ class Battleship
       p "You hit the Alliance's 2 unit ship!"
       computer.two_unit_ship += 1
     elsif computer.two_unit_ship == 2
-      render_computer_board(player.shot)
+      render_player_board(player.shot)
       p "You sunk the Alliance's 2 unit ship!"
       exit
     elsif computer.ship_2.include?(player.shot)
       render_player_board(player.shot)
       p "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
-    elsif computer.three_unit_ship = 3
-      render_computer_board(player.shot)
+    elsif computer.three_unit_ship == 3
+      render_player_board(player.shot)
       p "You sunk the Alliance's 3 unit ship!"
       exit
     else
-      render_computer_board(player.shot)
+      render_player_board(player.shot)
       p "You missed!"
     end
   end
