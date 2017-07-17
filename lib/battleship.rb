@@ -10,14 +10,14 @@ class Battleship
                 :player, :computer
 
   def initialize
-    @computer_board = [["A"," "," "," "," "],
-                       ["B"," "," "," "," "],
-                       ["C"," "," "," "," "],
-                       ["D"," "," "," "," "]]
-    @player_board   = [["A"," "," "," "," "],
-                       ["B"," "," "," "," "],
-                       ["C"," "," "," "," "],
-                       ["D"," "," "," "," "]]
+    @computer_board = [["A","A1","A2","A3","A4"],
+                       ["B","B1","B2","B3","B4"],
+                       ["C","C1","C2","C3","C4"],
+                       ["D","D1","D2","D3","D4"]]
+    @player_board   = [["A","A1","A2","A3","A4"],
+                       ["B","B1","B2","B3","B4"],
+                       ["C","C1","C2","C3","C4"],
+                       ["D","D1","D2","D3","D4"]]
     @player         = Player.new
     @computer       = Computer.new
   end
@@ -96,60 +96,56 @@ class Battleship
     end
   end
 
-  def player_shot_solution
+  def player_shot
     p "Enter coordinates to fire on the enemy fleet!"
     player.shot = gets.chomp.upcase
     print "> "
-    player_shot_solution if !player.firing_solution(player.shot)
+    player_shot if !player.firing_solution(player.shot)
   end
 
   def fire_fight
     while (player.two_unit_ship != 2 && player.three_unit_ship != 3) || (computer.two_unit_ship != 2 && computer.three_unit_ship != 3)
-      player_shot_solution
+      player_shot
       player_turn
       computer.firing_solution
       computer_turn
     end
   end
 
+  
+
   def computer_turn
     if player.ship_1.include?(computer.shot)
-      render_player_board(computer.shot, "H")
+      render_player_board(computer.shot, "H".red)
       p "Your 2 unit ship was hit!"
       player.two_unit_ship += 1
     elsif player.ship_2.include?(computer.shot)
-      render_player_board(computer.shot, "H")
+      render_player_board(computer.shot,"H".red)
       p "Your 3 unit ship was hit!"
       player.three_unit_ship += 1
-    elsif player.two_unit_ship == 2
-      render_player_board(computer.shot, "H")
-      p "Your 2 unit ship has been sunk!"
-    elsif player.three_unit_ship == 3
-      render_player_board(computer.shot, "H")
-      p "Your 3 unit ship has been sunk!"
     else
-      render_player_board(computer.shot, "M")
+      render_player_board(computer.shot,"M".blue)
       p "I have missed completely!"
     end
   end
 
   def player_turn
     if computer.ship_1.include?(player.shot)
-      render_computer_board(player.shot, "H")
+      render_computer_board(player.shot,"H".red)
       p "You hit the Alliance's 2 unit ship!"
       computer.two_unit_ship += 1
     elsif computer.two_unit_ship == 2
-      render_computer_board(player.shot, "H")
+      render_computer_board(player.shot,"H".red)
       p "You sunk the Alliance's 2 unit ship!"
     elsif computer.ship_2.include?(player.shot)
-      render_computer_board(player.shot, "H")
+      render_computer_board(player.shot,"H".red)
       p "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
     elsif computer.three_unit_ship == 3
-      render_computer_board(player.shot, "H")
+      render_computer_board(player.shot,"H".red)
       p "You sunk the Alliance's 3 unit ship!"
     else
-      render_computer_board(player.shot, "M")
+      render_computer_board(player.shot,"M".blue)
       p "You missed!"
     end
   end

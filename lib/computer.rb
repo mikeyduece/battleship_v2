@@ -61,6 +61,14 @@ class Computer
     coord_2
   end
 
+  def two_unit_sunk?
+    return true if two_unit_ship == 2
+  end
+
+  def three_unit_sunk
+    return true if three_unit_ship == 3
+  end
+
   def firing_solution
     @shot = board.sample
     if @shots.include?(@shot)
