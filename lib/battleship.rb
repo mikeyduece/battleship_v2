@@ -47,40 +47,52 @@ class Battleship
     puts "Enter first coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    player.ship_1_coord_1_validation(input)
+    if !player.ship_1_coord_1_validation(input)
+      ship_1_placement_coord_one
+    end
   end
 
   def ship_1_placement_coord_two
     puts "Enter second coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    player.ship_1_coord_2_validation(input)
+    if !player.ship_1_coord_2_validation(input)
+      ship_1_placement_coord_one
+    end
   end
 
   def ship_2_placement_coord_one
     p "Enter first coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    player.ship_2_coord_1_validation(input)
+    if !player.ship_2_coord_1_validation(input)
+      ship_2_placement_coord_one
+    end
   end
 
   def ship_2_placement_coord_two
     p "Enter second coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    player.ship_2_coord_2_validation
+    if !player.ship_2_coord_2_validation
+      ship_2_placement_coord_two
+    end
   end
 
   def ship_2_placement_coord_three
     p "Enter last coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    player.third_coord_validation(input)
+    if !player.third_coord_validation(input)
+      ship_2_placement_coord_three
+    end
   end
 
   def player_shot
+    p "Enter coordinates to fire on the enemy fleet!"
     player.shot = gets.chomp.upcase
     print "> "
+    player_shot if !player.firing_solution(player.shot)
   end
 
   def fire_fight
@@ -106,7 +118,7 @@ class Battleship
       p "Your 3 unit ship has been sunk!"
       exit
     else
-      p "You have missed completely!"
+      p "I have missed completely!"
     end
   end
 
@@ -126,6 +138,10 @@ class Battleship
     else
       p "You missed!"
     end
+  end
+
+  def render_player_board
+
   end
 
 end
