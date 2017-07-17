@@ -6,6 +6,7 @@ require './lib/messages'
 
 class Battleship
   include Messages
+
   attr_accessor :computer_board, :player_board,
                 :player, :computer
 
@@ -28,6 +29,7 @@ class Battleship
     puts computer_display
     puts player_display
     fire_fight
+    game_over
   end
 
   def computer_display
@@ -74,6 +76,7 @@ class Battleship
     print "> "
     input = gets.chomp.upcase
     if !player.ship_2_coord_1_validation(input)
+      invalid_placement
       ship_2_placement_coord_one
     end
   end
@@ -83,6 +86,7 @@ class Battleship
     print "> "
     input = gets.chomp.upcase
     if !player.ship_2_coord_2_validation(input)
+      invalid_placement
       ship_2_placement_coord_two
     end
   end
@@ -92,6 +96,7 @@ class Battleship
     print "> "
     input = gets.chomp.upcase
     if !player.third_coord_validation(input)
+      invalid_placement
       ship_2_placement_coord_three
     end
   end
@@ -109,6 +114,19 @@ class Battleship
       player_turn
       computer.firing_solution
       computer_turn
+    end
+  end
+
+  def game_over
+    if computer.two_unit_ship == 2 && computer.three_unit_ship == 3
+      exit_message
+      input = gets.chomp
+      if yes_commands(input)
+        song
+      else
+        p "Goodbye!"
+        exit
+      end
     end
   end
 
@@ -145,6 +163,7 @@ class Battleship
     else
       render_computer_board(player.shot,"M".blue)
       p "You missed!"
+      miss_message
     end
   end
 
