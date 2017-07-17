@@ -23,11 +23,11 @@ class Battleship
   end
 
   def computer_display
-    computer_display = Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
   end
 
   def player_display
-    player_display = Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
+    Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 80, :padding_left => 3, :border_x => "=", :border_i => "x"}
   end
 
   def place_computer_ships
@@ -78,9 +78,18 @@ class Battleship
     player.third_coord_validation(input)
   end
 
-  def fire_fight
-    # while (player.two_unit_ship != 2 && player.three_unit_ship != 3) || (computer.two_unit_ship != 2 && computer.three_unit_ship != 3)
+  def player_shot
+    player.shot = gets.chomp.upcase
+    print "> "
+  end
 
+  def fire_fight
+    while (player.two_unit_ship != 2 && player.three_unit_ship != 3) || (computer.two_unit_ship != 2 && computer.three_unit_ship != 3)
+      player_shot
+      player_turn
+      computer.firing_solution
+      computer_turn
+    end
   end
 
   def computer_turn
@@ -92,10 +101,12 @@ class Battleship
       player.three_unit_ship += 1
     elsif player.two_unit_ship.count == 2
       p "Your 2 unit ship has been sunk!"
+      exit
     elsif player.three_unit_ship.count == 3
       p "Your 3 unit ship has been sunk!"
+      exit
     else
-      p "The Browncoats have missed completely!"
+      p "You have missed completely!"
     end
   end
 
@@ -105,11 +116,13 @@ class Battleship
       computer.two_unit_ship += 1
     elsif computer.two_unit_ship.count == 2
       p "You sunk the Alliance's 2 unit ship!"
+      exit
     elsif computer.ship_2.include?(player.shot)
       p "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
     elsif computer.three_unit_ship.count = 3
       p "You sunk the Alliance's 3 unit ship!"
+      exit
     else
       p "You missed!"
     end
