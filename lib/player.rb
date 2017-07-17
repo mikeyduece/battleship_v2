@@ -15,7 +15,7 @@ class Player
     @ship_1 = []
     @ship_2 = []
     @shots  = []
-    @shot   = nil
+    @shot   = ""
     @two_unit_ship = 0
     @three_unit_ship = 0
   end
