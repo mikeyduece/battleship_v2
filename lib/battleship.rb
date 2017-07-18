@@ -41,7 +41,6 @@ class Battleship
   end
 
   def place_computer_ships
-    require "pry"; binding.pry
     computer.make_ship_one
     computer.make_ship_two
   end
@@ -58,7 +57,7 @@ class Battleship
     puts "Enter first coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if !player.ship_1_coord_1_validation(input)
+    if player.ship_1_coord_1_validation(input)
       ship_1_placement_coord_one
     end
   end
@@ -67,7 +66,7 @@ class Battleship
     puts "Enter second coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if !player.ship_1_coord_2_validation(input)
+    if player.ship_1_coord_2_validation(input)
       ship_1_placement_coord_two
     end
   end
@@ -76,7 +75,7 @@ class Battleship
     p "Enter first coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if !player.ship_2_coord_1_validation(input)
+    if player.ship_2_coord_1_validation(input)
       invalid_placement
       ship_2_placement_coord_one
     end
@@ -86,7 +85,7 @@ class Battleship
     p "Enter second coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if !player.ship_2_coord_2_validation(input)
+    if player.ship_2_coord_2_validation(input)
       invalid_placement
       ship_2_placement_coord_two
     end
@@ -96,7 +95,7 @@ class Battleship
     p "Enter last coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if !player.third_coord_validation(input)
+    if player.third_coord_validation(input)
       invalid_placement
       ship_2_placement_coord_three
     end

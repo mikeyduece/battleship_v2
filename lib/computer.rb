@@ -67,7 +67,7 @@ class Computer
 
   def ship_2_third_coord
     coord_3 = third_coord[ship_2]
-    if ship_1.include?(coord_3) || ship_2.include?(coord_3)
+    if ship_1.include?(coord_3)
       ship_2_third_coord
     end
     coord_3
