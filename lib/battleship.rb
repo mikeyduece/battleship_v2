@@ -41,6 +41,7 @@ class Battleship
   end
 
   def place_computer_ships
+    require "pry"; binding.pry
     computer.make_ship_one
     computer.make_ship_two
   end
