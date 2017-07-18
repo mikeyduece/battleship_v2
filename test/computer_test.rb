@@ -63,13 +63,6 @@ class ComputerTest < Minitest::Test
     assert_equal 3, computer.ship_2.length
   end
 
-  def test_it_can_tell_if_third_coord_on_board
-    assert computer.third_coord.member?("A4")
-    assert computer.third_coord.member?("B2")
-    assert computer.third_coord.member?("C3")
-    assert computer.third_coord.member?("D1")
-  end
-
   def test_it_can_tell_if_third_coord_off_board
     refute computer.third_coord.member?("D5")
     refute computer.third_coord.member?("A6")

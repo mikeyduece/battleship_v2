@@ -38,13 +38,13 @@ class PlayerTest < Minitest::Test
 
   def test_it_can_recognize_invalid_coords
     input = "A5"
-    refute player.ship_1_coord_1_validation(input)
+    assert player.ship_1_coord_1_validation(input)
   end
 
   def test_it_can_recognize_invalid_placement
     player.ship_1 = ["A3"]
     input  = "B4"
-    refute player.ship_1_coord_2_validation(input)
+    assert player.ship_1_coord_2_validation(input)
   end
 
   def test_it_can_validate_ship_1_coord_1
@@ -58,7 +58,7 @@ class PlayerTest < Minitest::Test
   def test_it_can_tell_if_ship_2_coord_1_is_invalid
     player.ship_1 = ["A1", "B1"]
     input = "A1"
-    refute player.ship_2_coord_1_validation(input)
+    assert player.ship_2_coord_1_validation(input)
   end
 
   def test_it_can_validate_ship_2_coord_2
@@ -72,7 +72,7 @@ class PlayerTest < Minitest::Test
   def test_it_can_recognize_invalid_placement_for_ship_2
     player.ship_2 = ["A1", "A2"]
     input         = "B3"
-    refute player.third_coord_validation(input)
+    assert player.third_coord_validation(input)
   end
 
   def test_third_coord_validation

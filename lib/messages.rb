@@ -1,14 +1,9 @@
 module Messages
-  def ask_for_ship_1_coords
-    puts "Enter your 2 unit ship's coordinates now: (ie A1)"
-    print "> "
-  end
 
   def exit_message
-    rate = 100
-    voice = "Ralph"
+    rate = 150
     goodbye = " I'm afraid. I'm afraid, Dave. Dave, my mind is going. I can feel it. I can feel it. My mind is going. There is no question about it. I can feel it. I can feel it. I can feel it. I'm a fraaaid. Good afternoon, gentlemen. I am a Hal 9000 computer. I became operational at the H.A.L. plant in Urbana, Illinois on the 12th of January 1992. My instructor was Mr. Langley, and he taught me to sing a song. If you'd like to hear it I can sing it for you. "
-    `say -r #{rate} -v #{voice} #{goodbye}`
+    `say -r #{rate} #{goodbye}`
   end
 
   def song
@@ -28,17 +23,14 @@ module Messages
   end
 
   def miss_message
-    rate = 500
-    voice = "Ralph"
-    miss = "Look Dave, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over."
-    `say -r #{rate} -v #{voice} #{miss}`
+    rate = 180
+    `say -r #{rate} " Look Dave, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over. "`
   end
 
   def invalid_placement
-    invalid = "Just what do you think you're doing, Dave? Place the ship within the defined
-    coordinates on the board"
-    rate = 500
+    invalid = "Just what do you think you're doing, Dave? Place the ship within the defined coordinates on the board"
+    rate = 300
     voice = "Ralph"
-    `say -r #{rate} -v #{voice} #{invalid}`
+    `say -r 180 "Just what do you think you're doing, Dave? Place the ship within the defined coordinates on the board"`
   end
 end
