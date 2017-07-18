@@ -74,45 +74,50 @@ class Battleship
     unless player.ship_1_coord_1_valid?(input)
       ship_1_placement_coord_one
     end
+    player.ship_1_coord_1(input)
   end
 
   def ship_1_placement_coord_two
     puts "Enter second coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if player.ship_1_coord_2_valid?(input)
+    unless player.ship_1_coord_2_valid?(input)
       ship_1_placement_coord_two
     end
+    player.ship_1_coord_2(input)
   end
 
   def ship_2_placement_coord_one
     p "Enter first coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if player.ship_2_coord_1_valid?(input)
+    unless player.ship_2_coord_1_valid?(input)
       invalid_placement
       ship_2_placement_coord_one
     end
+    player.ship_2_coord_1(input)
   end
 
   def ship_2_placement_coord_two
     p "Enter second coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if player.ship_2_coord_2_valid?(input)
+    unless player.ship_2_coord_2_valid?(input)
       invalid_placement
       ship_2_placement_coord_two
     end
+    player.ship_2_coord_2(input)
   end
 
   def ship_2_placement_coord_three
     p "Enter last coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if player.third_coord_valid?(input)
+    unless player.third_coord_valid?(input)
       invalid_placement
       ship_2_placement_coord_three
     end
+    player.ship_2_coord_3(input)
   end
 
   def player_shot
@@ -134,6 +139,7 @@ class Battleship
   def game_over
     if computer.two_unit_ship == 2 && computer.three_unit_ship == 3
       exit_message
+      puts "(Y)es or (N)o?"
       input = gets.chomp
       if yes_commands(input)
         song
@@ -141,6 +147,9 @@ class Battleship
         p "Goodbye!"
         exit
       end
+    elsif player.two_unit_ship == 2 && player.three_unit_ship == 3
+      you_lose
+      exit
     end
   end
 
