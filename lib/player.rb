@@ -40,44 +40,64 @@ class Player
       ["D3","C3"]=>"B3", ["D3","D2"]=>"D1", ["D3","D2"]=>"D4", ["D3","D4"]=>"D2", ["D4","C4"]=>"B4"}
   end
 
-  def ship_1_coord_1_validation?(input)
+  def ship_1_coord_1_valid?(input)
     if !board.include?(input)
       return false
     else
-      ship_1 << input
+      return true
     end
   end
 
-  def ship_1_coord_2_validation?(input)
+  def ship_1_coord_2_valid?(input)
     if ship_1[0]==input || !second_coord[ship_1[0]].include?(input) || !board.include?(input)
       return false
     else
-      ship_1 << input
+      return true
     end
   end
 
-  def ship_2_coord_1_validation?(input)
+  def ship_1_coord_1(input)
+    ship_1 << input if ship_1_coord_1_valid?(input)
+  end
+
+  def ship_1_coord_2(input)
+    ship_1 << input if ship_1_coord_2_valid?(input)
+  end
+
+  def ship_2_coord_1_valid?(input)
     if ship_1.include?(input) || !board.include?(input)
       return false
     else
-      ship_2 << input
+      true
     end
   end
 
-  def ship_2_coord_2_validation?(input)
+  def ship_2_coord_1(input)
+    ship_2 << input if ship_2_coord_1_valid?(input)
+  end
+
+  def ship_2_coord_2_valid?(input)
     if ship_1.include?(input) || !second_coord[ship_2[0]].include?(input) || !board.include?(input)
       return false
     else
-      ship_2 << input
+      return true
     end
   end
 
-  def third_coord_validation?(input)
+  def ship_2_coord_2(input)
+    ship_2 << input if ship_2_coord_2_valid?(input)
+  end
+
+  def third_coord_valid?(input)
     if ship_1.include?(input) || third_coord[ship_2]!=input || !board.include?(input)
       return false
     else
-      ship_2 << input
+      return true
     end
+  end
+
+  def ship_2_coord_3(input)
+    ship_2 << input if third_coord_valid?(input)
   end
 
   def two_unit_sunk?
