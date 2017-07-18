@@ -10,6 +10,13 @@ module Messages
      pid = fork{ exec 'afplay', "../Rick Astley - Never Gonna Give You Up.mp3" }
   end
 
+  def instructions
+    "Enter coordinates for your ship placement in alphanumeric format ie A1 or C3.
+    Ship coordinates must be consecutive and may not be placed diagonally. Once your ships have been placed,
+    you will begin taking turns with the computer, firing on ships until the enemy's fleet is completely sunk."
+    
+  end
+
   def quit_commands(command)
     %w(q Q quit Quit QUIT).include?(command)
   end

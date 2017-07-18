@@ -26,31 +26,31 @@ class PlayerTest < Minitest::Test
 
   def test_first_ship_coordinate_validation
     input = "A3"
-    player.ship_1_coord_1_validation(input)
+    player.ship_1_coord_1_validation?(input)
     assert_equal ["A3"], player.ship_1
   end
 
   def test_ship_1_coord_is_actually_in_array
     input = "A3"
-    player.ship_1_coord_1_validation(input)
+    player.ship_1_coord_1_validation?(input)
     assert_equal 1, player.ship_1.length
   end
 
   def test_it_can_recognize_invalid_coords
     input = "A5"
-    assert player.ship_1_coord_1_validation(input)
+    refute player.ship_1_coord_1_validation?(input)
   end
 
   def test_it_can_recognize_invalid_placement
     player.ship_1 = ["A3"]
     input  = "B4"
-    assert player.ship_1_coord_2_validation(input)
+    refute player.ship_1_coord_2_validation?(input)
   end
 
   def test_it_can_validate_ship_1_coord_1
     player.ship_1 = ["A1", "B1"]
     input = "C2"
-    player.ship_2_coord_1_validation(input)
+    player.ship_2_coord_1_validation?(input)
     assert_equal 1, player.ship_2.length
     assert_equal ["C2"], player.ship_2
   end
@@ -58,28 +58,28 @@ class PlayerTest < Minitest::Test
   def test_it_can_tell_if_ship_2_coord_1_is_invalid
     player.ship_1 = ["A1", "B1"]
     input = "A1"
-    assert player.ship_2_coord_1_validation(input)
+    refute player.ship_2_coord_1_validation?(input)
   end
 
   def test_it_can_validate_ship_2_coord_2
     player.ship_1 = ["A1", "B1"]
     player.ship_2 = ["C2"]
     input         = "C3"
-    player.ship_2_coord_2_validation(input)
+    player.ship_2_coord_2_validation?(input)
     assert_equal ["C2", "C3"], player.ship_2
   end
 
   def test_it_can_recognize_invalid_placement_for_ship_2
     player.ship_2 = ["A1", "A2"]
     input         = "B3"
-    assert player.third_coord_validation(input)
+    refute player.third_coord_validation?(input)
   end
 
   def test_third_coord_validation
     player.ship_1 = ["D2", "D3"]
     player.ship_2 = ["A1", "A2"]
     input         = "A3"
-    player.third_coord_validation(input)
+    player.third_coord_validation?(input)
     assert_equal ["A1", "A2", "A3"], player.ship_2
   end
 

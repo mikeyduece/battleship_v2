@@ -61,7 +61,7 @@ class Computer
 
   def ship_2_coord_2
     coord_2 = second_coord[ship_2[0]].sample
-    ship_2_coord_2(coord_2) if ship_1.include?(coord_2)
+    ship_2_coord_2 if ship_1.include?(coord_2)
     coord_2
   end
 

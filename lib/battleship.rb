@@ -23,6 +23,20 @@ class Battleship
     @computer       = Computer.new
   end
 
+  def intro
+    puts `clear`
+    puts "               Welcome to BATTLESHIP!"
+    puts "==========================================================="
+    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    print "> "
+    input = gets.chomp
+    case input
+    when "p"||"P" then start
+    when "i"||"I" then instructions; intro
+    when quit_commands(input) then exit
+    end
+  end
+
   def start
     place_computer_ships
     place_player_ships
@@ -57,7 +71,7 @@ class Battleship
     puts "Enter first coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if player.ship_1_coord_1_validation(input)
+    if player.ship_1_coord_1_validation?(input)
       ship_1_placement_coord_one
     end
   end
@@ -66,7 +80,7 @@ class Battleship
     puts "Enter second coordinate for your 2 unit ship: ex. A1"
     input = gets.chomp.upcase
     print "> "
-    if player.ship_1_coord_2_validation(input)
+    if player.ship_1_coord_2_validation?(input)
       ship_1_placement_coord_two
     end
   end
@@ -75,7 +89,7 @@ class Battleship
     p "Enter first coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if player.ship_2_coord_1_validation(input)
+    if player.ship_2_coord_1_validation?(input)
       invalid_placement
       ship_2_placement_coord_one
     end
@@ -85,7 +99,7 @@ class Battleship
     p "Enter second coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if player.ship_2_coord_2_validation(input)
+    if player.ship_2_coord_2_validation?(input)
       invalid_placement
       ship_2_placement_coord_two
     end
@@ -95,7 +109,7 @@ class Battleship
     p "Enter last coordinate for 3 unit ship: ex A1"
     print "> "
     input = gets.chomp.upcase
-    if player.third_coord_validation(input)
+    if player.third_coord_validation?(input)
       invalid_placement
       ship_2_placement_coord_three
     end
