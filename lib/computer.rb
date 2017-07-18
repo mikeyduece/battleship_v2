@@ -45,10 +45,10 @@ class Computer
 
   def make_ship_two
     coord_1 = ship_2_coord_1
-    coord_2 = ship_2_coord_2(ship_2[0])
-    coord_3 = third_coord[ship_2]
     ship_2 << coord_1
+    coord_2 = ship_2_coord_2
     ship_2 << coord_2
+    coord_3 = ship_2_third_coord
     ship_2 << coord_3
     @ship_2 = ship_2.flatten
   end
@@ -59,15 +59,18 @@ class Computer
     coord_1
   end
 
-  def ship_2_coord_2(coord_1)
-    coord_2 = second_coord[coord_1].sample
-    ship_2_coord_2(coord_1) if ship_1.any? {|x| coord_2.include?(x)}
+  def ship_2_coord_2
+    coord_2 = second_coord[ship_2[0]].sample
+    ship_2_coord_2(coord_2) if ship_1.include?(coord_2)
     coord_2
   end
 
-  def third_coord(coords)
-    coord_3 = third[coords]
-    third_coord(coords) if
+  def ship_2_third_coord
+    coord_3 = third_coord[ship_2]
+    if ship_1.include?(coord_3) || ship_2.include?(coord_3)
+      ship_2_third_coord
+    end
+    coord_3
   end
 
   def two_unit_sunk?
