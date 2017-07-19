@@ -48,9 +48,6 @@ class Player
     end
   end
 
-  def ship_1_coord_1(input)
-    ship_1 << input if ship_1_coord_1_valid?(input)
-  end
 
   def ship_1_coord_2_valid?(input)
     if ship_1[0]==input || !second_coord[ship_1[0]].include?(input) || !board.include?(input)
@@ -60,6 +57,9 @@ class Player
     end
   end
 
+  def ship_1_coord_1(input)
+    ship_1 << input if ship_1_coord_1_valid?(input)
+  end
 
   def ship_1_coord_2(input)
     ship_1 << input if ship_1_coord_2_valid?(input)

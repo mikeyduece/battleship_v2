@@ -24,7 +24,6 @@ class Battleship
   end
 
   def intro
-    puts `clear`
     puts "               Welcome to BATTLESHIP!"
     puts "==========================================================="
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
@@ -38,6 +37,7 @@ class Battleship
   end
 
   def start
+    start_game
     place_computer_ships
     place_player_ships
     puts computer_display
@@ -68,7 +68,7 @@ class Battleship
   end
 
   def ship_1_placement_coord_one
-    puts "Enter first coordinate for your 2 unit ship: ex. A1"
+    puts "Enter first coordinate for your 2 unit ship: ex. A1".cyan
     input = gets.chomp.upcase
     print "> "
     unless player.ship_1_coord_1_valid?(input)
@@ -78,7 +78,7 @@ class Battleship
   end
 
   def ship_1_placement_coord_two
-    puts "Enter second coordinate for your 2 unit ship: ex. A1"
+    puts "Enter second coordinate for your 2 unit ship: ex. A1".cyan
     input = gets.chomp.upcase
     print "> "
     unless player.ship_1_coord_2_valid?(input)
@@ -88,7 +88,7 @@ class Battleship
   end
 
   def ship_2_placement_coord_one
-    p "Enter first coordinate for 3 unit ship: ex A1"
+    puts "Enter first coordinate for 3 unit ship: ex A1".cyan
     print "> "
     input = gets.chomp.upcase
     unless player.ship_2_coord_1_valid?(input)
@@ -99,7 +99,7 @@ class Battleship
   end
 
   def ship_2_placement_coord_two
-    p "Enter second coordinate for 3 unit ship: ex A1"
+    puts "Enter second coordinate for 3 unit ship: ex A1".cyan
     print "> "
     input = gets.chomp.upcase
     unless player.ship_2_coord_2_valid?(input)
@@ -110,7 +110,7 @@ class Battleship
   end
 
   def ship_2_placement_coord_three
-    p "Enter last coordinate for 3 unit ship: ex A1"
+    puts "Enter last coordinate for 3 unit ship: ex A1".cyan
     print "> "
     input = gets.chomp.upcase
     unless player.third_coord_valid?(input)
@@ -121,7 +121,7 @@ class Battleship
   end
 
   def player_shot
-    p "Enter coordinates to fire on the enemy fleet!"
+    puts "Enter coordinates to fire on the enemy fleet!".red.underline
     player.shot = gets.chomp.upcase
     print "> "
     player_shot if !player.firing_solution(player.shot)
@@ -136,56 +136,37 @@ class Battleship
     end
   end
 
-  def game_over
-    if computer.two_unit_ship == 2 && computer.three_unit_ship == 3
-      exit_message
-      puts "(Y)es or (N)o?"
-      input = gets.chomp
-      if yes_commands(input)
-        song
-      else
-        p "Goodbye!"
-        exit
-      end
-    elsif player.two_unit_ship == 2 && player.three_unit_ship == 3
-      you_lose
-      exit
-    end
-  end
-
-
-
   def computer_turn
     if player.ship_1.include?(computer.shot)
       render_player_board(computer.shot, "H".red)
-      p "Your 2 unit ship was hit!"
+      puts "Your 2 unit ship was hit!"
       player.two_unit_ship += 1
-      p "I sunk your two unit ship" if player.two_unit_sunk?
+      puts "I sunk your two unit ship" if player.two_unit_sunk?
     elsif player.ship_2.include?(computer.shot)
       render_player_board(computer.shot,"H".red)
-      p "Your 3 unit ship was hit!"
+      puts "Your 3 unit ship was hit!"
       player.three_unit_ship += 1
-      p "I sunk your three unit ship" if player.three_unit_sunk?
+      puts "I sunk your three unit ship" if player.three_unit_sunk?
     else
       render_player_board(computer.shot,"M".blue)
-      p "I have missed completely!"
+      puts "I have missed completely!".white.bold
     end
   end
 
   def player_turn
     if computer.ship_1.include?(player.shot)
       render_computer_board(player.shot,"H".red)
-      p "You hit the Alliance's 2 unit ship!"
+      puts "You hit the Alliance's 2 unit ship!"
       computer.two_unit_ship += 1
-      p "You sunk the Alliance's 2 unit ship!" if computer.two_unit_sunk?
+      puts "You sunk the Alliance's 2 unit ship!" if computer.two_unit_sunk?
     elsif computer.ship_2.include?(player.shot)
       render_computer_board(player.shot,"H".red)
-      p "You hit the Alliance's 3 unit ship!"
+      puts "You hit the Alliance's 3 unit ship!"
       computer.three_unit_ship += 1
-      p "You sunk the Alliance's 3 unit ship!" if computer.three_unit_sunk?
+      puts "You sunk the Alliance's 3 unit ship!" if computer.three_unit_sunk?
     else
       render_computer_board(player.shot,"M".blue)
-      p "You missed!"
+      puts "You missed!".white.bold
       miss_message
     end
   end
@@ -214,5 +195,21 @@ class Battleship
     end
   end
 
+  def game_over
+    if computer.two_unit_ship == 2 && computer.three_unit_ship == 3
+      exit_message
+      puts "(Y)es or (N)o?"
+      input = gets.chomp
+      if yes_commands(input)
+        song
+      else
+        p "Goodbye!"
+        exit
+      end
+    elsif player.two_unit_ship == 2 && player.three_unit_ship == 3
+      you_lose
+      exit
+    end
+  end
 
 end

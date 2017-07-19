@@ -66,8 +66,11 @@ class Computer
   end
 
   def ship_2_third_coord
+    count = 0
+    make_ship_two if count == 5
     coord_3 = third_coord[ship_2]
     if ship_1.include?(coord_3)
+      count += 1
       ship_2_third_coord
     end
     coord_3
