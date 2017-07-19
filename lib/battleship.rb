@@ -196,7 +196,7 @@ class Battleship
   end
 
   def game_over
-    if computer.two_unit_ship == 2 && computer.three_unit_ship == 3
+    if computer.two_unit_sunk? && computer.three_unit_sunk?
       exit_message
       puts "(Y)es or (N)o?"
       input = gets.chomp
@@ -206,7 +206,7 @@ class Battleship
         p "Goodbye!"
         exit
       end
-    elsif player.two_unit_ship == 2 && player.three_unit_ship == 3
+    elsif player.two_unit_sunk? && player.three_unit_sunk?
       you_lose
       exit
     end
