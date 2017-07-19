@@ -3,4 +3,4 @@ require './lib/battleship'
 
 
 bs = Battleship.new
-bs.start
+bs.intro
