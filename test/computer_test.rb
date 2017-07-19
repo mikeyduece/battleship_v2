@@ -120,4 +120,25 @@ class ComputerTest < Minitest::Test
     computer.firing_solution
     assert_equal 3, computer.shots.count
   end
+
+  def test_it_can_tell_if_ship_1_sunk
+    computer.two_unit_ship = 2
+    assert computer.two_unit_sunk?
+  end
+
+  def test_it_can_tell_if_ship_1_not_sunk
+    computer.two_unit_ship = 1
+    refute computer.two_unit_sunk?
+  end
+
+  def test_it_can_tell_if_ship_2_sunk
+    computer.three_unit_ship = 3
+    assert computer.three_unit_sunk?
+  end
+
+  def test_it_can_tell_if_ship_2_not_sunk
+    computer.three_unit_ship = 2
+    refute computer.three_unit_sunk?
+  end
+
 end

@@ -1,9 +1,12 @@
 require './lib/board_selections'
+require './lib/validations'
+
 
 class Computer
-  include BoardSelections
 
-  # attr_reader :board
+  include BoardSelections
+  include Validations
+
   attr_accessor :ship_1, :ship_2, :shot, :shots,
                 :two_unit_ship, :three_unit_ship
 
@@ -50,36 +53,16 @@ class Computer
   def ship_2_coord_3
     coord_3 = second_coord[ship_2[0]].sample
     if coord_valid?(coord_3) && !ship_2.nil? && ship_2.length == 2
-      return if ship_2.length == 3
       ship_2 << coord_3
     else
       make_ship_two
     end
   end
 
-  def coord_valid?(coord)
-    if ship_1.include?(coord)
-      return false
-    else
-      return true
-    end
-  end
-
-  def two_unit_sunk?
-    return true if two_unit_ship == 2
-  end
-
-  def three_unit_sunk?
-    return true if three_unit_ship == 3
-  end
-
   def firing_solution
     @shot = board.sample
-    if @shots.include?(@shot)
-      firing_solution
-    else
-      @shots << @shot
-    end
+    @shots.include?(@shot) ? firing_solution : @shots << @shot
     @shot
   end
+
 end

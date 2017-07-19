@@ -144,4 +144,25 @@ class PlayerTest < Minitest::Test
     refute player.firing_solution("A1")
   end
 
+  def test_it_can_tell_if_ship_1_sunk
+    player.two_unit_ship = 2
+    assert player.two_unit_sunk?
+  end
+
+  def test_it_can_tell_if_ship_1_not_sunk
+    player.two_unit_ship = 1
+    refute player.two_unit_sunk?
+  end
+
+  def test_it_can_tell_if_ship_2_sunk
+    player.three_unit_ship = 3
+    assert player.three_unit_sunk?
+  end
+
+  def test_it_can_tell_if_ship_2_not_sunk
+    player.three_unit_ship = 2
+    refute player.three_unit_sunk?
+  end
+
+
 end
