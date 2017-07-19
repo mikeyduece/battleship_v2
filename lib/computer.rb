@@ -31,6 +31,7 @@ class Computer
   end
 
   def make_ship_two
+    ship_2.clear
     ship_2_coord_1
     ship_2_coord_2
     ship_2_coord_3
@@ -38,23 +39,21 @@ class Computer
 
   def ship_2_coord_1
     coord_1 = board.sample
-    coord_valid?(coord_1) ? ship_2 << coord_1 : ship_2_coord_1
+    coord_valid?(coord_1) ? ship_2 << coord_1 : make_ship_two
   end
 
   def ship_2_coord_2
     coord_2 = second_coord[ship_2[0]].sample
-    coord_valid?(coord_2) ? ship_2 << coord_2 : ship_2_coord_2
+    coord_valid?(coord_2) ? ship_2 << coord_2 : make_ship_two
   end
 
   def ship_2_coord_3
-    @count = 0
-    place_ships if @count == 5
-    coord_3 = third_coord[ship_2].sample
-    if coord_valid?(coord_3)
+    coord_3 = second_coord[ship_2[0]].sample
+    if coord_valid?(coord_3) && !ship_2.nil? && ship_2.length == 2
+      return if ship_2.length == 3
       ship_2 << coord_3
     else
-      @count += 1
-      ship_2_coord_3
+      make_ship_two
     end
   end
 
