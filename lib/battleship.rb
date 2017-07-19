@@ -24,7 +24,7 @@ class Battleship
   end
 
   def intro
-    puts "               Welcome to BATTLESHIP!"
+    puts "               Welcome to BATTLESHIP!".white.bold
     puts "==========================================================="
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     print "> "
@@ -38,10 +38,12 @@ class Battleship
 
   def start
     start_game
-    place_computer_ships
-    place_player_ships
     puts computer_display
     puts player_display
+    computer.place_ships
+    puts computer.ship_1
+    puts computer.ship_2
+    place_player_ships
     fire_fight
     game_over
   end
@@ -52,11 +54,6 @@ class Battleship
 
   def player_display
     Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 40, :border_x => "=", :border_i => "x"}
-  end
-
-  def place_computer_ships
-    computer.make_ship_one
-    computer.make_ship_two
   end
 
   def place_player_ships
@@ -167,7 +164,6 @@ class Battleship
     else
       render_computer_board(player.shot,"M".blue)
       puts "You missed!".white.bold
-      miss_message
     end
   end
 
@@ -195,21 +191,21 @@ class Battleship
     end
   end
 
-  def game_over
-    if computer.two_unit_sunk? && computer.three_unit_sunk?
-      exit_message
-      puts "(Y)es or (N)o?"
-      input = gets.chomp
-      if yes_commands(input)
-        song
-      else
-        p "Goodbye!"
-        exit
-      end
-    elsif player.two_unit_sunk? && player.three_unit_sunk?
-      you_lose
-      exit
-    end
-  end
+  # def game_over
+  #   if computer.two_unit_sunk? && computer.three_unit_sunk?
+  #     exit_message
+  #     puts "(Y)es or (N)o?"
+  #     input = gets.chomp
+  #     if yes_commands(input)
+  #       song
+  #     else
+  #       p "Goodbye!"
+  #       exit
+  #     end
+  #   elsif player.two_unit_sunk? && player.three_unit_sunk?
+  #     you_lose
+  #     exit
+  #   end
+  # end
 
 end

@@ -32,15 +32,27 @@ module Messages
     %w(y Y yes Yes YES).include?(command)
   end
 
-  def miss_message
-    rate = 250
-    `say -r #{rate} " Look Dave, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over. "`
-  end
-
   def invalid_placement
     rate = 250
     voice = "Ralph"
     `say -r 180 "Just what do you think you're doing, Dave? Place the ship within the defined coordinates on the board"`
+  end
+
+  def game_over
+    if computer.two_unit_sunk? && computer.three_unit_sunk?
+      exit_message
+      puts "(Y)es or (N)o?"
+      input = gets.chomp
+      if yes_commands(input)
+        song
+      else
+        p "Goodbye!"
+        exit
+      end
+    elsif player.two_unit_sunk? && player.three_unit_sunk?
+      you_lose
+      exit
+    end
   end
 
   def you_lose
