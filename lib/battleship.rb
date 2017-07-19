@@ -38,7 +38,7 @@ class Battleship
 
   def start
     start_game
-    place_computer_ships
+    computer.place_ships
     place_player_ships
     puts computer_display
     puts player_display
@@ -54,10 +54,10 @@ class Battleship
     Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 40, :border_x => "=", :border_i => "x"}
   end
 
-  def place_computer_ships
-    computer.make_ship_one
-    computer.make_ship_two
-  end
+  # def place_computer_ships
+  #   computer.make_ship_one
+  #   computer.make_ship_two
+  # end
 
   def place_player_ships
     ship_1_placement_coord_one
@@ -167,7 +167,6 @@ class Battleship
     else
       render_computer_board(player.shot,"M".blue)
       puts "You missed!".white.bold
-      miss_message
     end
   end
 

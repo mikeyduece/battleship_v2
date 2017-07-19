@@ -32,11 +32,6 @@ module Messages
     %w(y Y yes Yes YES).include?(command)
   end
 
-  def miss_message
-    rate = 250
-    `say -r #{rate} " Look Dave, I can see you're really upset about this. I honestly think you ought to sit down calmly, take a stress pill, and think things over. "`
-  end
-
   def invalid_placement
     rate = 250
     voice = "Ralph"

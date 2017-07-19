@@ -57,9 +57,48 @@ class ComputerTest < Minitest::Test
     assert_instance_of Hash, computer.third_coord
   end
 
+  def test_ship_2_coord_1_valid?
+    computer.ship_1 = ["D1", "D2"]
+    assert computer.coord_valid?("A1")
+  end
+
+  def test_ship_2_coord_1_invalid?
+    computer.ship_1 = ["D1", "D2"]
+    refute computer.coord_valid?("D1")
+  end
+
+  def test_ship_2_coord_2_valid?
+    computer.ship_1 = ["D1", "D2"]
+    computer.ship_2 = ["A2"]
+    assert computer.coord_valid?("A1")
+  end
+
+  def test_ship_2_coord_2_invalid?
+    computer.ship_1 = ["D1", "D2"]
+    refute computer.coord_valid?("D1")
+  end
+
+  def test_ship_2_coord_3_valid?
+    computer.ship_1 = ["A4", "B4"]
+    computer.ship_2 = ["B1","B2"]
+    assert computer.coord_valid?("B3")
+  end
+
+  def test_ship_2_coord_3_invalid?
+    computer.ship_1 = ["A4", "B4"]
+    computer.ship_2 = ["B2","B3"]
+    refute computer.coord_valid?("B4")
+  end
+
   def test_it_can_make_a_three_unit_ship
     computer.make_ship_one
     computer.make_ship_two
+    assert_equal 3, computer.ship_2.length
+  end
+
+  def test_it_can_place_both_ships
+    computer.place_ships
+    assert_equal 2, computer.ship_1.length
     assert_equal 3, computer.ship_2.length
   end
 

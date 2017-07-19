@@ -16,6 +16,13 @@ class Computer
     @three_unit_ship = 0
   end
 
+  def place_ships
+    ship_1.clear
+    ship_2.clear
+    make_ship_one
+    make_ship_two
+  end
+
   def make_ship_one
     coord_1 = board.sample
     ship_1 << coord_1
@@ -24,36 +31,39 @@ class Computer
   end
 
   def make_ship_two
-    coord_1 = ship_2_coord_1
-    ship_2 << coord_1
-    coord_2 = ship_2_coord_2
-    ship_2 << coord_2
-    coord_3 = ship_2_third_coord
-    ship_2 << coord_3
-    @ship_2 = ship_2.flatten
+    ship_2_coord_1
+    ship_2_coord_2
+    ship_2_coord_3
   end
 
   def ship_2_coord_1
     coord_1 = board.sample
-    ship_2_coord_1 if ship_1.include?(coord_1)
-    coord_1
+    coord_valid?(coord_1) ? ship_2 << coord_1 : ship_2_coord_1
   end
 
   def ship_2_coord_2
     coord_2 = second_coord[ship_2[0]].sample
-    ship_2_coord_2 if ship_1.include?(coord_2)
-    coord_2
+    coord_valid?(coord_2) ? ship_2 << coord_2 : ship_2_coord_2
   end
 
-  def ship_2_third_coord
-    count = 0
-    make_ship_two if count == 5
-    coord_3 = third_coord[ship_2]
-    if ship_1.include?(coord_3)
-      count += 1
-      ship_2_third_coord
+  def ship_2_coord_3
+    @count = 0
+    place_ships if @count == 5
+    coord_3 = third_coord[ship_2].sample
+    if coord_valid?(coord_3)
+      ship_2 << coord_3
+    else
+      @count += 1
+      ship_2_coord_3
     end
-    coord_3
+  end
+
+  def coord_valid?(coord)
+    if ship_1.include?(coord)
+      return false
+    else
+      return true
+    end
   end
 
   def two_unit_sunk?

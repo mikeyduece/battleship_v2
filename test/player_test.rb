@@ -95,6 +95,7 @@ class PlayerTest < Minitest::Test
   end
 
   def test_it_can_recognize_invalid_placement_for_ship_2
+    player.ship_1 = ["B1","B2"]
     player.ship_2 = ["A1", "A2"]
     input         = "B3"
     refute player.third_coord_valid?(input)
@@ -104,7 +105,7 @@ class PlayerTest < Minitest::Test
     player.ship_1 = ["D2", "D3"]
     player.ship_2 = ["A1", "A2"]
     input         = "A3"
-    player.third_coord_valid?(input)
+    assert player.third_coord_valid?(input)
   end
 
   def test_it_can_insert_ship_2_coord_3
