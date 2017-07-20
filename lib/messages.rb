@@ -19,7 +19,7 @@ module Messages
   end
 
   def song
-    pid = fork{ exec 'afplay', "./soundfile.mp3"}
+    pid = fork{ exec 'afplay', "./data/soundfile.mp3"}
     sleep 20
     puts `killall afplay`
   end
@@ -149,7 +149,7 @@ module Messages
     puts "               Welcome to BATTLESHIP!".white.bold
     puts "==========================================================="
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
-
+    print "> "
   end
 
 end

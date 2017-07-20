@@ -25,7 +25,6 @@ class Battleship
   def intro
     logo
     opening_message
-    print "> "
     input = gets.chomp
     case input
     when "p"||"P"             then start
