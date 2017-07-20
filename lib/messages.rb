@@ -1,5 +1,9 @@
 module Messages
 
+  def total_time
+    puts "The fight lasted #{@stop - @start} seconds"
+  end
+
   def exit_message
     rate = 150
     goodbye = " I'm afraid. I'm afraid, Dave. Dave, my mind is going. I can feel it. I can feel it. My mind is going. There is no question about it. I can feel it. I can feel it. I can feel it. I'm a fraaaid. Good afternoon, gentlemen. I am a Hal 9000 computer. I became operational at the H.A.L. plant in Urbana, Illinois on the 12th of January 1992. My instructor was Mr. Langley, and he taught me to sing a song. If you'd like to hear it I can sing it for you. "
@@ -139,6 +143,13 @@ module Messages
                                                                            | $$
                                                                            |__/"
      puts banner
+  end
+
+  def opening_message
+    puts "               Welcome to BATTLESHIP!".white.bold
+    puts "==========================================================="
+    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+
   end
 
 end

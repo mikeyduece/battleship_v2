@@ -13,14 +13,10 @@ class Battleship
                 :player, :computer, :shot_count
 
   def initialize
-    @computer_board = [["A","A1","A2","A3","A4"],
-                       ["B","B1","B2","B3","B4"],
-                       ["C","C1","C2","C3","C4"],
-                       ["D","D1","D2","D3","D4"]]
-    @player_board   = [["A","A1","A2","A3","A4"],
-                       ["B","B1","B2","B3","B4"],
-                       ["C","C1","C2","C3","C4"],
-                       ["D","D1","D2","D3","D4"]]
+    @computer_board = [["A","A1","A2","A3","A4"], ["B","B1","B2","B3","B4"],
+                       ["C","C1","C2","C3","C4"], ["D","D1","D2","D3","D4"]]
+    @player_board   = [["A","A1","A2","A3","A4"], ["B","B1","B2","B3","B4"],
+                       ["C","C1","C2","C3","C4"], ["D","D1","D2","D3","D4"]]
     @player         = Player.new
     @computer       = Computer.new
     @shot_count     = 0
@@ -28,14 +24,12 @@ class Battleship
 
   def intro
     logo
-    puts "               Welcome to BATTLESHIP!".white.bold
-    puts "==========================================================="
-    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    opening_message
     print "> "
     input = gets.chomp
     case input
-    when "p"||"P" then start
-    when "i"||"I" then instructions; intro
+    when "p"||"P"             then start
+    when "i"||"I"             then instructions; intro
     when quit_commands(input) then exit
     end
   end
@@ -115,11 +109,12 @@ class Battleship
     puts "Enter coordinates to fire on the enemy fleet!".red.underline
     player.shot = gets.chomp.upcase
     print "> "
+    exit if quit_commands(player.shot)
     player_shot if !player.firing_solution(player.shot)
   end
 
   def fire_fight
-    until (player.two_unit_ship == 2 && player.three_unit_ship == 3) || (computer.two_unit_ship == 2 && computer.three_unit_ship == 3)
+    until (player.two_unit_sunk? && player.three_unit_sunk?) || (computer.two_unit_sunk? && computer.three_unit_sunk?)
       player_shot
       player_turn
       computer.firing_solution
@@ -128,69 +123,53 @@ class Battleship
     @stop= Time.now
   end
 
-  def computer_turn
-    if player.ship_1.include?(computer.shot)
-      render_player_board(computer.shot, "H")
-      puts "Your 2 unit ship was hit!"
-      player.two_unit_ship += 1
-      puts "I sunk your two unit ship" if player.two_unit_sunk?
-    elsif player.ship_2.include?(computer.shot)
-      render_player_board(computer.shot,"H")
-      puts "Your 3 unit ship was hit!"
-      player.three_unit_ship += 1
-      puts "I sunk your three unit ship" if player.three_unit_sunk?
-    else
-      render_player_board(computer.shot,"M")
-      puts "I have missed completely!".white.bold
-    end
+  def register_computer_hit_player_ship_1(shot)
+    render_player_board(shot, "H")
+    puts "Your 2 unit ship was hit!"
+    player.two_unit_ship += 1
+    puts "I sunk your two unit ship" if player.two_unit_sunk?
   end
 
-  def player_turn
-    @shot_count += 1
-    if computer.ship_1.include?(player.shot)
-      render_computer_board(player.shot,"H")
-      puts "You hit the Alliance's 2 unit ship!"
-      computer.two_unit_ship += 1
-      puts "You sunk the Alliance's 2 unit ship!" if computer.two_unit_sunk?
-    elsif computer.ship_2.include?(player.shot)
-      render_computer_board(player.shot,"H")
-      puts "You hit the Alliance's 3 unit ship!"
-      computer.three_unit_ship += 1
-      puts "You sunk the Alliance's 3 unit ship!" if computer.three_unit_sunk?
-    else
-      render_computer_board(player.shot,"M")
-      puts "You missed!".white.bold
-    end
+  def register_computer_hit_player_ship_2(shot)
+    render_player_board(shot,"H")
+    puts "Your 3 unit ship was hit!"
+    player.three_unit_ship += 1
+    puts "I sunk your three unit ship" if player.three_unit_sunk?
+  end
+
+  def register_computer_miss(shot)
+    render_player_board(shot,"M")
+    puts "I have missed completely!".white.bold
+  end
+
+  def register_player_hit_computer_ship_1(shot)
+    render_computer_board(shot,"H")
+    puts "You hit the Alliance's 2 unit ship!"
+    computer.two_unit_ship += 1
+    puts "You sunk the Alliance's 2 unit ship!" if computer.two_unit_sunk?
+  end
+
+  def register_player_hit_computer_ship_2(shot)
+    render_computer_board(shot,"H")
+    puts "You hit the Alliance's 3 unit ship!"
+    computer.three_unit_ship += 1
+    puts "You sunk the Alliance's 3 unit ship!" if computer.three_unit_sunk?
+  end
+
+  def register_player_miss_computer(shot)
+    render_computer_board(shot,"M")
+    puts "You missed!".white.bold
   end
 
   def render_player_board(shot, status)
-    player_board.map do |row|
-      shot_sub(row, shot, status)
-    end
+    player_board.map {|row| shot_sub(row, shot, status)}
     puts player_display
   end
 
   def render_computer_board(shot, status)
     puts `clear`
-    computer_board.map do |row|
-      shot_sub(row, shot, status)
-    end
+    computer_board.map {|row| shot_sub(row, shot, status)}
     puts computer_display
   end
-
-  def shot_sub(row, shot, status)
-    row.map! do |coord|
-      if coord == shot
-        coord = emoji[status]
-      else
-        coord = coord
-      end
-    end
-  end
-
-  def total_time
-    puts "The fight lasted #{@stop - @start} seconds"
-  end
-
 
 end
