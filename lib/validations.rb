@@ -9,18 +9,17 @@ module Validations
   end
 
   def coord_valid?(coord)
-    if ship_1.include?(coord)
-      return false
-    else
-      return true
-    end
+    ship_1.include?(coord) ? false : true
   end
 
   def ship_1_coord_1_valid?(input)
-    if !board.include?(input)
-      return false
-    else
-      return true
+    !board.include?(input) ? false : true
+  end
+
+  def ship_1_coord_1_validation_loop(input)
+    unless player.ship_1_coord_1_valid?(input)
+      invalid_placement
+      ship_1_placement_coord_one
     end
   end
 
@@ -32,11 +31,21 @@ module Validations
     end
   end
 
+  def ship_1_coord_2_validation_loop(input)
+    unless player.ship_1_coord_2_valid?(input)
+      invalid_placement
+      ship_1_placement_coord_two
+    end
+  end
+
   def ship_2_coord_1_valid?(input)
-    if ship_1.include?(input) || !board.include?(input)
-      return false
-    else
-      true
+    ship_1.include?(input) || !board.include?(input) ? false : true
+  end
+
+  def ship_2_coord_1_validation_loop(input)
+    unless player.ship_2_coord_1_valid?(input)
+      invalid_placement
+      ship_2_placement_coord_one
     end
   end
 
@@ -48,11 +57,25 @@ module Validations
     end
   end
 
+  def ship_2_coord_2_validation_loop(input)
+    unless player.ship_2_coord_2_valid?(input)
+      invalid_placement
+      ship_2_placement_coord_two
+    end
+  end
+
   def third_coord_valid?(input)
     if ship_1.include?(input) || third_coord[ship_2].nil? || !third_coord[ship_2].include?(input) || !board.include?(input)
       return false
     else
       return true
+    end
+  end
+
+  def third_coord_validation_loop(input)
+    unless player.third_coord_valid?(input)
+      invalid_placement
+      ship_2_placement_coord_three
     end
   end
 

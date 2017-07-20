@@ -28,12 +28,4 @@ module BoardSelections
       ["D4","D3"]=>["D2"]}
   end
 
-  # def two_unit_sunk?
-  #   return true if two_unit_ship == 2
-  # end
-  #
-  # def three_unit_sunk?
-  #   return true if three_unit_ship == 3
-  # end
-
 end
