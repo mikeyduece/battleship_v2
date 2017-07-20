@@ -5,15 +5,15 @@ class Player
   include BoardSelections
   include Validations
 
-  attr_accessor :ship_1, :ship_2, :shot, :shots, :two_unit_ship,
-                :three_unit_ship
+  attr_accessor :ship_1, :ship_2, :shot, :shots,
+                :two_unit_ship, :three_unit_ship
 
   def initialize
-    @ship_1 = []
-    @ship_2 = []
-    @shots  = []
-    @shot   = ""
-    @two_unit_ship = 0
+    @ship_1          = []
+    @ship_2          = []
+    @shots           = []
+    @shot            = ""
+    @two_unit_ship   = 0
     @three_unit_ship = 0
   end
 

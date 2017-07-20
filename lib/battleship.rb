@@ -30,8 +30,8 @@ class Battleship
     print "> "
     input = gets.chomp
     case input
-    when "p"||"P" then start
-    when "i"||"I" then instructions; intro
+    when "p"||"P"             then start
+    when "i"||"I"             then instructions; intro
     when quit_commands(input) then exit
     end
   end
@@ -176,9 +176,9 @@ class Battleship
     end
   end
 
-  def total_time
-    puts "The fight lasted #{@stop - @start} seconds"
-  end
+  # def total_time
+  #   puts "The fight lasted #{@stop - @start} seconds"
+  # end
 
 
 end
