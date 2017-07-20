@@ -38,11 +38,7 @@ class Player
   end
 
   def firing_solution(input)
-    if !board.include?(input) || @shots.include?(input)
-      return false
-    else
-      @shots << input
-    end
+    !board.include?(input) || @shots.include?(input) ? false : @shots << input
   end
 
 end

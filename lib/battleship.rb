@@ -3,9 +3,11 @@ require 'terminal-table'
 require './lib/computer'
 require './lib/player'
 require './lib/messages'
+require './lib/validations'
 
 class Battleship
   include Messages
+  include Validations
 
   attr_accessor :computer_board, :player_board,
                 :player, :computer, :shot_count
@@ -21,7 +23,7 @@ class Battleship
                        ["D","D1","D2","D3","D4"]]
     @player         = Player.new
     @computer       = Computer.new
-    @shot_count = 0
+    @shot_count     = 0
   end
 
   def intro
@@ -73,10 +75,7 @@ class Battleship
     puts "Enter first coordinate for your 2 unit ship: ex. A1".cyan
     input = gets.chomp.upcase
     print "> "
-    unless player.ship_1_coord_1_valid?(input)
-      invalid_placement
-      ship_1_placement_coord_one
-    end
+    ship_1_coord_1_validation_loop(input)
     player.ship_1_coord_1(input)
   end
 
@@ -84,10 +83,7 @@ class Battleship
     puts "Enter second coordinate for your 2 unit ship: ex. A1".cyan
     input = gets.chomp.upcase
     print "> "
-    unless player.ship_1_coord_2_valid?(input)
-      invalid_placement
-      ship_1_placement_coord_two
-    end
+    ship_1_coord_2_validation_loop(input)
     player.ship_1_coord_2(input)
   end
 
@@ -95,10 +91,7 @@ class Battleship
     puts "Enter first coordinate for 3 unit ship: ex A1".cyan
     print "> "
     input = gets.chomp.upcase
-    unless player.ship_2_coord_1_valid?(input)
-      invalid_placement
-      ship_2_placement_coord_one
-    end
+    ship_2_coord_1_validation_loop(input)
     player.ship_2_coord_1(input)
   end
 
@@ -106,10 +99,7 @@ class Battleship
     puts "Enter second coordinate for 3 unit ship: ex A1".cyan
     print "> "
     input = gets.chomp.upcase
-    unless player.ship_2_coord_2_valid?(input)
-      invalid_placement
-      ship_2_placement_coord_two
-    end
+    ship_2_coord_2_validation_loop(input)
     player.ship_2_coord_2(input)
   end
 
@@ -117,10 +107,7 @@ class Battleship
     puts "Enter last coordinate for 3 unit ship: ex A1".cyan
     print "> "
     input = gets.chomp.upcase
-    unless player.third_coord_valid?(input)
-      invalid_placement
-      ship_2_placement_coord_three
-    end
+    third_coord_validation_loop(input)
     player.ship_2_coord_3(input)
   end
 
