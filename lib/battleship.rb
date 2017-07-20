@@ -124,16 +124,6 @@ class Battleship
     @stop= Time.now
   end
 
-  def computer_turn
-    if player.ship_1.include?(computer.shot)
-      register_computer_hit_player_ship_1(computer.shot)
-    elsif player.ship_2.include?(computer.shot)
-      register_computer_hit_player_ship_2(computer.shot)
-    else
-      register_computer_miss(computer.shot)
-    end
-  end
-
   def register_computer_hit_player_ship_1(shot)
     render_player_board(shot, "H")
     puts "Your 2 unit ship was hit!"
@@ -151,17 +141,6 @@ class Battleship
   def register_computer_miss(shot)
     render_player_board(shot,"M")
     puts "I have missed completely!".white.bold
-  end
-
-  def player_turn
-    @shot_count += 1
-    if computer.ship_1.include?(player.shot)
-      register_player_hit_computer_ship_1(player.shot)
-    elsif computer.ship_2.include?(player.shot)
-      register_player_hit_computer_ship_2(player.shot)
-    else
-      register_player_miss_computer(player.shot)
-    end
   end
 
   def register_player_hit_computer_ship_1(shot)
@@ -192,10 +171,6 @@ class Battleship
     puts `clear`
     computer_board.map {|row| shot_sub(row, shot, status)}
     puts computer_display
-  end
-
-  def shot_sub(row, shot, status)
-    row.map! {|coord| coord == shot ? coord = emoji[status] : coord = coord}
   end
 
 end
