@@ -1,4 +1,3 @@
-require 'catpix'
 module Messages
 
   def exit_message
@@ -140,14 +139,4 @@ module Messages
      puts banner
   end
 
-  def hal_9000
-    Catpix::print_image "../hal.jpg",
-  :limit_x => 1.0,
-  :limit_y => 0,
-  :center_x => true,
-  :center_y => true,
-  :bg => "white",
-  :bg_fill => true,
-  :resolution => "low"
-  end
 end
