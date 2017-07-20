@@ -25,6 +25,7 @@ class Battleship
   end
 
   def intro
+    logo
     puts "               Welcome to BATTLESHIP!".white.bold
     puts "==========================================================="
     puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
@@ -38,6 +39,7 @@ class Battleship
   end
 
   def start
+    puts ascii_ship
     start_game
     puts computer_display
     puts player_display
@@ -173,6 +175,7 @@ class Battleship
   end
 
   def render_player_board(shot, status)
+    puts `clear`
     player_board.map do |row|
       shot_sub(row, shot, status)
     end
@@ -180,6 +183,7 @@ class Battleship
   end
 
   def render_computer_board(shot, status)
+    puts `clear`
     computer_board.map do |row|
       shot_sub(row, shot, status)
     end
