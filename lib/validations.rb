@@ -49,7 +49,7 @@ module Validations
   end
 
   def third_coord_valid?(input)
-    if ship_1.include?(input) || !third_coord[ship_2].include?(input) || !board.include?(input)
+    if ship_1.include?(input) || third_coord[ship_2].nil? || !third_coord[ship_2].include?(input) || !board.include?(input)
       return false
     else
       return true

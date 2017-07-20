@@ -15,7 +15,9 @@ module Messages
   end
 
   def song
-     pid = fork{ exec 'afplay', "../Rick Astley - Never Gonna Give You Up.mp3" }
+    pid = fork{ exec 'afplay', "../Rick Astley - Never Gonna Give You Up.mp3"}
+    sleep 20
+    puts `killall afplay`
   end
 
   def instructions

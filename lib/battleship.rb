@@ -52,11 +52,13 @@ class Battleship
   end
 
   def computer_display
-    Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board, :style => {:width => 40, :border_x => "=", :border_i => "x"}
+    Terminal::Table.new :title => "Computer Board", :headings => [".", "1", "2", "3", "4"], :rows => computer_board,
+    :style => {:width => 50, :padding_left => 3, :padding_right => 2, :border_x => "=", :border_i => "x"}
   end
 
   def player_display
-    Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board, :style => {:width => 40, :border_x => "=", :border_i => "x"}
+    Terminal::Table.new :title => "Player Board", :headings => [".", "1", "2", "3", "4"], :rows => player_board,
+    :style => {:width => 50, :padding_left => 3, :padding_right => 2, :border_x => "=", :border_i => "x"}
   end
 
   def place_player_ships
