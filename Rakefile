@@ -30,3 +30,8 @@ end
 RSpec::Core::RakeTask.new(:spec)
 
 task default: :test
+task :loop do
+  100.times do
+    Rake::Task["test"].execute
+  end
+end

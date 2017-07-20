@@ -41,8 +41,6 @@ class Battleship
     puts computer_display
     puts player_display
     computer.place_ships
-    puts computer.ship_1
-    puts computer.ship_2
     place_player_ships
     fire_fight
     game_over
@@ -178,7 +176,7 @@ class Battleship
     computer_board.map do |row|
       shot_sub(row, shot, status)
     end
-    puts computer_display
+    puts                                        computer_display
   end
 
   def shot_sub(row, shot, status)
