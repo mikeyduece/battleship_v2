@@ -34,14 +34,12 @@ class Computer
   def make_ship_two
     ship_2.clear
     ship_2_coord_1
-    # require "pry"; binding.pry if ship_2.length > 1
     ship_2_coord_2
     ship_2_coord_3
   end
 
   def ship_2_coord_1
     coord_1 = board.sample
-    # require "pry"; binding.pry
     coord_valid?(coord_1) ? ship_2 << coord_1 : ship_2_coord_1
   end
 
@@ -53,7 +51,6 @@ class Computer
   def ship_2_coord_3
     ship_2 = @ship_2[0..1]
     make_ship_two if ship_2.nil? || ship_2.length != 2
-    require "pry"; binding.pry unless third_coord.has_key?(ship_2)
     coord_3 = third_coord[ship_2].sample
     if coord_valid?(coord_3)
       @ship_2 << coord_3
