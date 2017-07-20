@@ -40,6 +40,7 @@ module Messages
 
   def game_over
     if computer.two_unit_sunk? && computer.three_unit_sunk?
+      puts "You took #{@shot_count} shots."
       exit_message
       puts "(Y)es or (N)o?"
       input = gets.chomp
@@ -50,9 +51,15 @@ module Messages
         exit
       end
     elsif player.two_unit_sunk? && player.three_unit_sunk?
+      puts "You took #{@shot_count} shots."
       you_lose
       exit
     end
+  end
+
+  def emoji
+    {"M" => "\xF0\x9F\x92\xA9",
+     "H" => "\xF0\x9F\x8E\xAF"}
   end
 
   def you_lose
