@@ -175,7 +175,6 @@ class Battleship
   end
 
   def render_player_board(shot, status)
-    puts `clear`
     player_board.map do |row|
       shot_sub(row, shot, status)
     end
