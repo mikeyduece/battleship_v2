@@ -24,9 +24,7 @@ class Battleship
 
   def intro
     logo
-    puts "               Welcome to BATTLESHIP!".white.bold
-    puts "==========================================================="
-    puts "Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
+    opening_message
     print "> "
     input = gets.chomp
     case input
@@ -111,11 +109,12 @@ class Battleship
     puts "Enter coordinates to fire on the enemy fleet!".red.underline
     player.shot = gets.chomp.upcase
     print "> "
+    exit if quit_commands(player.shot)
     player_shot if !player.firing_solution(player.shot)
   end
 
   def fire_fight
-    until (player.two_unit_ship == 2 && player.three_unit_ship == 3) || (computer.two_unit_ship == 2 && computer.three_unit_ship == 3)
+    until (player.two_unit_sunk? && player.three_unit_sunk?) || (computer.two_unit_sunk? && computer.three_unit_sunk?)
       player_shot
       player_turn
       computer.firing_solution
