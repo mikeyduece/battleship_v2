@@ -70,6 +70,7 @@ class Battleship
     input = gets.chomp.upcase
     print "> "
     unless player.ship_1_coord_1_valid?(input)
+      invalid_placement
       ship_1_placement_coord_one
     end
     player.ship_1_coord_1(input)
@@ -80,6 +81,7 @@ class Battleship
     input = gets.chomp.upcase
     print "> "
     unless player.ship_1_coord_2_valid?(input)
+      invalid_placement
       ship_1_placement_coord_two
     end
     player.ship_1_coord_2(input)
