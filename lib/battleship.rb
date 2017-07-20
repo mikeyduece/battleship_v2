@@ -176,9 +176,4 @@ class Battleship
     end
   end
 
-  # def total_time
-  #   puts "The fight lasted #{@stop - @start} seconds"
-  # end
-
-
 end
