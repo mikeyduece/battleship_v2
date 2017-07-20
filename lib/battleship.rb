@@ -13,14 +13,10 @@ class Battleship
                 :player, :computer, :shot_count
 
   def initialize
-    @computer_board = [["A","A1","A2","A3","A4"],
-                       ["B","B1","B2","B3","B4"],
-                       ["C","C1","C2","C3","C4"],
-                       ["D","D1","D2","D3","D4"]]
-    @player_board   = [["A","A1","A2","A3","A4"],
-                       ["B","B1","B2","B3","B4"],
-                       ["C","C1","C2","C3","C4"],
-                       ["D","D1","D2","D3","D4"]]
+    @computer_board = [["A","A1","A2","A3","A4"], ["B","B1","B2","B3","B4"],
+                       ["C","C1","C2","C3","C4"], ["D","D1","D2","D3","D4"]]
+    @player_board   = [["A","A1","A2","A3","A4"], ["B","B1","B2","B3","B4"],
+                       ["C","C1","C2","C3","C4"], ["D","D1","D2","D3","D4"]]
     @player         = Player.new
     @computer       = Computer.new
     @shot_count     = 0
@@ -164,27 +160,19 @@ class Battleship
   end
 
   def render_player_board(shot, status)
-    player_board.map do |row|
-      shot_sub(row, shot, status)
-    end
+    player_board.map {|row| shot_sub(row, shot, status)}
     puts player_display
   end
 
   def render_computer_board(shot, status)
     puts `clear`
-    computer_board.map do |row|
-      shot_sub(row, shot, status)
-    end
+    computer_board.map {|row| shot_sub(row, shot, status)}
     puts computer_display
   end
 
   def shot_sub(row, shot, status)
     row.map! do |coord|
-      if coord == shot
-        coord = emoji[status]
-      else
-        coord = coord
-      end
+      coord == shot ? coord = emoji[status] : coord = coord
     end
   end
 

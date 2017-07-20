@@ -11,11 +11,11 @@ class Computer
                 :two_unit_ship, :three_unit_ship
 
   def initialize
-    @ship_1 = []
-    @ship_2 = []
-    @shots  = []
-    @shot   = nil
-    @two_unit_ship = 0
+    @ship_1          = []
+    @ship_2          = []
+    @shots           = []
+    @shot            = nil
+    @two_unit_ship   = 0
     @three_unit_ship = 0
   end
 
@@ -52,11 +52,7 @@ class Computer
     ship_2 = @ship_2[0..1]
     make_ship_two if ship_2.nil? || ship_2.length != 2
     coord_3 = third_coord[ship_2].sample
-    if coord_valid?(coord_3)
-      @ship_2 << coord_3
-    else
-      make_ship_two
-    end
+    coord_valid?(coord_3) ? @ship_2 << coord_3 : make_ship_two
   end
 
   def firing_solution
