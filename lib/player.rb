@@ -2,6 +2,7 @@ require './lib/board_selections'
 require './lib/validations'
 
 class Player
+  
   include BoardSelections
   include Validations
 

@@ -7,6 +7,7 @@ require './lib/validations'
 require './lib/fire_fight'
 
 class Battleship
+  
   include Messages
   include Validations
   include FireFight
