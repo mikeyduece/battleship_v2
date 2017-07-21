@@ -103,9 +103,4 @@ module Validations
     end
   end
 
-  # def shot_sub(row, shot, status)
-  #   row.map! {|coord| coord == shot ? coord = emoji[status] : coord = coord}
-  # end
-
-
 end
