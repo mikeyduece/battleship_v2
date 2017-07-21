@@ -24,7 +24,8 @@ module Validations
   end
 
   def ship_1_coord_2_valid?(input)
-    if ship_1[0]==input || !second_coord[ship_1[0]].include?(input) || !board.include?(input)
+    if ship_1[0]==input || !second_coord[ship_1[0]].include?(input) ||
+      !board.include?(input)
       return false
     else
       return true
@@ -50,7 +51,8 @@ module Validations
   end
 
   def ship_2_coord_2_valid?(input)
-    if ship_1.include?(input) || !second_coord[ship_2[0]].include?(input) || !board.include?(input)
+    if ship_1.include?(input) || !second_coord[ship_2[0]].include?(input) ||
+      !board.include?(input)
       return false
     else
       return true
@@ -65,7 +67,8 @@ module Validations
   end
 
   def third_coord_valid?(input)
-    if ship_1.include?(input) || third_coord[ship_2].nil? || !third_coord[ship_2].include?(input) || !board.include?(input)
+    if ship_1.include?(input) || third_coord[ship_2].nil? ||
+      !third_coord[ship_2].include?(input) || !board.include?(input)
       return false
     else
       return true
@@ -100,9 +103,9 @@ module Validations
     end
   end
 
-  def shot_sub(row, shot, status)
-    row.map! {|coord| coord == shot ? coord = emoji[status] : coord = coord}
-  end
+  # def shot_sub(row, shot, status)
+  #   row.map! {|coord| coord == shot ? coord = emoji[status] : coord = coord}
+  # end
 
 
 end

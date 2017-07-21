@@ -4,10 +4,12 @@ require './lib/computer'
 require './lib/player'
 require './lib/messages'
 require './lib/validations'
+require './lib/fire_fight'
 
 class Battleship
   include Messages
   include Validations
+  include FireFight
 
   attr_accessor :computer_board, :player_board,
                 :player, :computer, :shot_count
@@ -110,54 +112,6 @@ class Battleship
     print "> "
     exit if quit_commands(player.shot)
     player_shot if !player.firing_solution(player.shot)
-  end
-
-  def fire_fight
-    until (player.two_unit_sunk? && player.three_unit_sunk?) || (computer.two_unit_sunk? && computer.three_unit_sunk?)
-      player_shot
-      player_turn
-      computer.firing_solution
-      computer_turn
-    end
-    @stop= Time.now
-  end
-
-  def register_computer_hit_player_ship_1(shot)
-    render_player_board(shot, "H")
-    puts "Your 2 unit ship was hit!"
-    player.two_unit_ship += 1
-    puts "I sunk your two unit ship" if player.two_unit_sunk?
-  end
-
-  def register_computer_hit_player_ship_2(shot)
-    render_player_board(shot,"H")
-    puts "Your 3 unit ship was hit!"
-    player.three_unit_ship += 1
-    puts "I sunk your three unit ship" if player.three_unit_sunk?
-  end
-
-  def register_computer_miss(shot)
-    render_player_board(shot,"M")
-    puts "I have missed completely!".white.bold
-  end
-
-  def register_player_hit_computer_ship_1(shot)
-    render_computer_board(shot,"H")
-    puts "You hit the Alliance's 2 unit ship!"
-    computer.two_unit_ship += 1
-    puts "You sunk the Alliance's 2 unit ship!" if computer.two_unit_sunk?
-  end
-
-  def register_player_hit_computer_ship_2(shot)
-    render_computer_board(shot,"H")
-    puts "You hit the Alliance's 3 unit ship!"
-    computer.three_unit_ship += 1
-    puts "You sunk the Alliance's 3 unit ship!" if computer.three_unit_sunk?
-  end
-
-  def register_player_miss_computer(shot)
-    render_computer_board(shot,"M")
-    puts "You missed!".white.bold
   end
 
   def render_player_board(shot, status)

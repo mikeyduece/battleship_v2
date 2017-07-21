@@ -20,7 +20,7 @@ module Messages
 
   def song
     pid = fork{ exec 'afplay', "./data/soundfile.mp3"}
-    sleep 20
+    sleep 19
     puts `killall afplay`
   end
 
